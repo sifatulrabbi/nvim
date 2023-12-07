@@ -62,43 +62,45 @@ return {
             })
         end
 
+        local function run_autoformat(args)
+            local client_id = args.data.client_id
+            local client = vim.lsp.get_client_by_id(client_id)
+            local bufnr = args.buf
+            local is_python = vim.bo.filetype == 'python'
+
+            -- Only attach to clients that support document formatting
+            if not is_python and not client.server_capabilities.documentFormattingProvider then
+                return
+            end
+
+            -- Create an autocmd that will run *before* we save the buffer.
+            --  Run the formatting command for the LSP that has just attached.
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                group = get_augroup(client),
+                buffer = bufnr,
+                callback = function()
+                    if not format_is_enabled then return end
+
+                    if should_use_prettier() then
+                        format_with_prettier(bufnr)
+                    elseif is_python then
+                        format_with_black(bufnr)
+                    else
+                        vim.lsp.buf.format {
+                            async = false,
+                            filter = function(c)
+                                return c.id == client.id
+                            end,
+                        }
+                    end
+                end,
+            })
+        end
+
         -- See `:help LspAttach` for more information about this autocmd event.
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('kickstart-lsp-attach-format', { clear = true }),
-            callback = function(args)
-                local client_id = args.data.client_id
-                local client = vim.lsp.get_client_by_id(client_id)
-                local bufnr = args.buf
-                local is_python = vim.bo.filetype == 'python'
-
-                -- Only attach to clients that support document formatting
-                if not is_python and not client.server_capabilities.documentFormattingProvider then
-                    return
-                end
-
-                -- Create an autocmd that will run *before* we save the buffer.
-                --  Run the formatting command for the LSP that has just attached.
-                vim.api.nvim_create_autocmd('BufWritePre', {
-                    group = get_augroup(client),
-                    buffer = bufnr,
-                    callback = function()
-                        if not format_is_enabled then return end
-
-                        if should_use_prettier() then
-                            format_with_prettier(bufnr)
-                        elseif is_python then
-                            format_with_black(bufnr)
-                        else
-                            vim.lsp.buf.format {
-                                async = false,
-                                filter = function(c)
-                                    return c.id == client.id
-                                end,
-                            }
-                        end
-                    end,
-                })
-            end,
+            callback = run_autoformat,
         })
     end,
 }

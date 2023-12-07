@@ -134,5 +134,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+require('sifatulrabbi.plugins.lsp')
+require('sifatulrabbi.plugins.cmp')
+require('sifatulrabbi.plugins.colors')
+require('sifatulrabbi.plugins.harpoon')
+require('sifatulrabbi.plugins.treesitter')
+require('sifatulrabbi.plugins.telescope')
+require('sifatulrabbi.plugins.ibl')
+require('sifatulrabbi.plugins.gitsigns')
+require('sifatulrabbi.plugins.which-key')
+require('sifatulrabbi.plugins.git-fugitive')
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
