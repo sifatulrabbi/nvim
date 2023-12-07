@@ -2,8 +2,8 @@ return {
     'neovim/nvim-lspconfig',
     config = function()
         -- Switch for controlling whether you want autoformatting.
-        --  Use :KickstartFormatToggle to toggle autoformatting on or off
         local format_is_enabled = true
+        --  Use :KickstartFormatToggle to toggle autoformatting on or off
         vim.api.nvim_create_user_command('KickstartFormatToggle', function()
             format_is_enabled = not format_is_enabled
             print('Setting autoformatting to: ' .. tostring(format_is_enabled))
@@ -47,27 +47,20 @@ return {
             })
         end
 
-        -- local function should_use_black_formatter()
-        --     local filenames = { 'python' }
-        --     local filetype = vim.bo.filetype
-        --     print(filetype)
-        --     return vim.tbl_contains(filenames, filetype)
-        -- end
-        --
-        -- local function format_with_black(bufnr)
-        --     local filename = vim.api.nvim_buf_get_name(bufnr)
-        --     local cmd = 'black ' .. vim.fn.shellescape(filename)
-        --
-        --     vim.fn.jobstart(cmd, {
-        --         on_exit = function(job_id, exit_code, event_type)
-        --             if exit_code == 0 then
-        --                 vim.api.nvim_buf_call(bufnr, function() vim.cmd('e!') end)
-        --             else
-        --                 print('Black failed to format the file.')
-        --             end
-        --         end
-        --     })
-        -- end
+        local function format_with_black(bufnr)
+            local filename = vim.api.nvim_buf_get_name(bufnr)
+            local black_cmd = 'black --quiet ' .. vim.fn.shellescape(filename)
+
+            vim.fn.jobstart(black_cmd, {
+                on_exit = function(job_id, exit_code, event_type)
+                    if exit_code == 0 then
+                        vim.api.nvim_buf_call(bufnr, function() vim.cmd('e!') end)
+                    else
+                        print('Black failed to format the file.')
+                    end
+                end
+            })
+        end
 
         -- See `:help LspAttach` for more information about this autocmd event.
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -76,9 +69,10 @@ return {
                 local client_id = args.data.client_id
                 local client = vim.lsp.get_client_by_id(client_id)
                 local bufnr = args.buf
+                local is_python = vim.bo.filetype == 'python'
 
                 -- Only attach to clients that support document formatting
-                if not client.server_capabilities.documentFormattingProvider then
+                if not is_python and not client.server_capabilities.documentFormattingProvider then
                     return
                 end
 
@@ -88,33 +82,23 @@ return {
                     group = get_augroup(client),
                     buffer = bufnr,
                     callback = function()
-                        if not format_is_enabled then
-                            return
-                        end
+                        if not format_is_enabled then return end
 
-                        -- for prettier supported files do not use the vim's default lsp formatter
                         if should_use_prettier() then
                             format_with_prettier(bufnr)
-                            return
+                        elseif is_python then
+                            format_with_black(bufnr)
+                        else
+                            vim.lsp.buf.format {
+                                async = false,
+                                filter = function(c)
+                                    return c.id == client.id
+                                end,
+                            }
                         end
-
-                        -- if should_use_black_formatter() then
-                        --     print('formatting with black')
-                        --     format_with_black(bufnr)
-                        --     return
-                        -- end
-
-                        -- for rest of the files use the built in formatter
-                        vim.lsp.buf.format {
-                            async = false,
-                            filter = function(c)
-                                return c.id == client.id
-                            end,
-                        }
                     end,
                 })
-            end
-            ,
+            end,
         })
     end,
 }
