@@ -3,7 +3,7 @@ require('rose-pine').setup({
     dark_variant = 'main',
     dim_nc_background = false,
     disable_background = true,
-    disable_float_background = true,
+    disable_float_background = false,
     disable_italics = true,
 })
 
