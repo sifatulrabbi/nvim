@@ -68,6 +68,9 @@ return {
             local bufnr = args.buf
             local is_python = vim.bo.filetype == 'python'
 
+            if is_python then
+                vim.keymap.set('n', '<leader>F', function() format_with_black(bufnr) end, { desc = "Format using black" })
+            end
             -- Only attach to clients that support document formatting
             if not is_python and not client.server_capabilities.documentFormattingProvider then
                 return
@@ -80,11 +83,10 @@ return {
                 buffer = bufnr,
                 callback = function()
                     if not format_is_enabled then return end
+                    if is_python then return end
 
                     if should_use_prettier() then
                         format_with_prettier(bufnr)
-                    elseif is_python then
-                        format_with_black(bufnr)
                     else
                         vim.lsp.buf.format {
                             async = false,
