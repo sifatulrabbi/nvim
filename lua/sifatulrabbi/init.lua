@@ -65,6 +65,8 @@ require('lazy').setup({
     name = 'rose-pine',
   },
 
+  { 'folke/tokyonight.nvim' },
+
   {
     'nvim-lualine/lualine.nvim',
     opts = {
@@ -134,9 +136,12 @@ require('lazy').setup({
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-    }
+    opts = {},
   },
+
+  { 'jose-elias-alvarez/typescript.nvim' },
+
+  { 'kyazdani42/nvim-web-devicons' },
 
   require 'sifatulrabbi.plugins.autoformat',
   require 'sifatulrabbi.plugins.debug',

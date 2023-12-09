@@ -15,3 +15,5 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move HL line up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move HL line up" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "" })
+
+vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open Lazy menu" })
