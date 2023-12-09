@@ -1,3 +1,8 @@
+local prettier_filetypes = {
+    'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'scss', 'less', 'json', 'yaml',
+    'markdown', 'html', 'vue',
+}
+
 return {
     'neovim/nvim-lspconfig',
     config = function()
@@ -24,12 +29,8 @@ return {
         end
 
         local function should_use_prettier()
-            local filetypes = {
-                'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'scss', 'less', 'json', 'yaml',
-                'markdown', 'html', 'vue',
-            }
             local filetype = vim.bo.filetype
-            return vim.tbl_contains(filetypes, filetype)
+            return vim.tbl_contains(prettier_filetypes, filetype)
         end
 
         local function format_with_prettier(bufnr)
@@ -62,6 +63,10 @@ return {
             })
         end
 
+        local function nmap(keymap, fn, desc)
+            vim.keymap.set('n', keymap, fn, { desc = desc })
+        end
+
         local function run_autoformat(args)
             local client_id = args.data.client_id
             local client = vim.lsp.get_client_by_id(client_id)
@@ -69,7 +74,9 @@ return {
             local is_python = vim.bo.filetype == 'python'
 
             if is_python then
-                vim.keymap.set('n', '<leader>F', function() format_with_black(bufnr) end, { desc = "Format using black" })
+                nmap('<leader>F', function() format_with_black(bufnr) end, 'Format using black')
+            elseif should_use_prettier() then
+                nmap('<leader>F', function() format_with_prettier(bufnr) end, 'Format using prettier')
             end
             -- Only attach to clients that support document formatting
             if not is_python and not client.server_capabilities.documentFormattingProvider then
@@ -85,16 +92,12 @@ return {
                     if not format_is_enabled then return end
                     if is_python then return end
 
-                    if should_use_prettier() then
-                        format_with_prettier(bufnr)
-                    else
-                        vim.lsp.buf.format {
-                            async = false,
-                            filter = function(c)
-                                return c.id == client.id
-                            end,
-                        }
-                    end
+                    vim.lsp.buf.format {
+                        async = false,
+                        filter = function(c)
+                            return c.id == client.id
+                        end,
+                    }
                 end,
             })
         end

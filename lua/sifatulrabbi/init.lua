@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require('sifatulrabbi.sets')
+require('sifatulrabbi.settings')
 require('sifatulrabbi.keymaps')
 
 --    `:help lazy.nvim.txt` for more info
@@ -43,8 +43,15 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'rafamadriz/friendly-snippets',
+      'dcampos/cmp-snippy',   -- alternative snippet engine
+      'ray-x/cmp-treesitter', -- for Tree-sitter integration
+      'f3fora/cmp-spell',     -- for spell checking
+      'hrsh7th/cmp-path',     -- for file path completions
+      'hrsh7th/cmp-buffer',   -- for buffer completions
     },
   },
+
+  { 'mfussenegger/nvim-lint' },
 
   { 'folke/which-key.nvim',  opts = {} },
 
@@ -102,6 +109,13 @@ require('lazy').setup({
   },
 
   {
+    'nvim-treesitter/nvim-treesitter-context',
+    config = function()
+      vim.cmd [[highlight TreesitterContext guibg=#2E3440]]
+    end
+  },
+
+  {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     requires = { { 'nvim-lua/plenary.nvim' } },
@@ -109,6 +123,19 @@ require('lazy').setup({
       local harpoon = require('harpoon')
       harpoon:setup({})
     end
+  },
+
+  {
+    'mbbill/undotree',
+    config = function()
+    end
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+    }
   },
 
   require 'sifatulrabbi.plugins.autoformat',
@@ -144,6 +171,7 @@ require('sifatulrabbi.plugins.ibl')
 require('sifatulrabbi.plugins.gitsigns')
 require('sifatulrabbi.plugins.which-key')
 require('sifatulrabbi.plugins.git-fugitive')
+require('sifatulrabbi.plugins.undotree')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
