@@ -1,5 +1,4 @@
 require("sifatulrabbi.plugins.colorscheme")
-require("sifatulrabbi.plugins.harpoon")
 require("sifatulrabbi.plugins.telescope")
 require("sifatulrabbi.plugins.treesitter")
 require("sifatulrabbi.plugins.lsp")

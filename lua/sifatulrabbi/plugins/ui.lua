@@ -46,7 +46,11 @@ require("gitsigns").setup({
                 gs.prev_hunk()
             end)
             return "<Ignore>"
-        end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
+        end, {
+            expr = true,
+            buffer = bufnr,
+            desc = "Jump to previous hunk",
+        })
     end,
 })
 
@@ -57,12 +61,19 @@ require("lualine").setup({
         component_separators = "|",
         section_separators = "",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+        disabled_filetypes = {
+            statusline = { "dashboard", "alpha", "starter" },
+        },
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
             { "diagnostics" },
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            {
+                "filetype",
+                icon_only = true,
+                separator = "",
+                padding = { left = 1, right = 0 },
+            },
         },
         lualine_x = {
             -- stylua: ignore
@@ -107,4 +118,7 @@ end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
 require("ibl").setup({ scope = { highlight = highlight } })
-hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+hooks.register(
+    hooks.type.SCOPE_HIGHLIGHT,
+    hooks.builtin.scope_highlight_from_extmark
+)

@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("sifatulrabbi.settings")
-require("sifatulrabbi.keymaps")
 
 -- `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -136,11 +135,23 @@ require("lazy").setup({
     { "kyazdani42/nvim-web-devicons" },
 
     { "stevearc/conform.nvim", opts = {} },
+
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "williamboman/mason.nvim",
+            "jay-babu/mason-nvim-dap.nvim",
+            "leoluz/nvim-dap-go",
+            "theHamsta/nvim-dap-virtual-text",
+        },
+    },
 }, {})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+local highlight_group =
+    vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
@@ -150,6 +161,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 require("sifatulrabbi.plugins")
+require("sifatulrabbi.keymaps")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
