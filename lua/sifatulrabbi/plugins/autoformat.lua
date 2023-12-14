@@ -24,6 +24,8 @@ require("conform").setup({
         python = { "black" },
         typescript = { "prettier" },
         javascript = { "prettier" },
+        typescriptreact = { "prettier" },
+        javascriptreact = { "prettier" },
         json = { "prettier" },
         html = { "prettier" },
         yaml = { "prettier" },

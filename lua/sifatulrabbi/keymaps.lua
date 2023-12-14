@@ -22,8 +22,8 @@ vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open 
 
 vim.keymap.set( "n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
-vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open [l]azy" })
+vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open [m]ason" })
 
 local function set_dap_keymaps(dap, dapui)
     vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })

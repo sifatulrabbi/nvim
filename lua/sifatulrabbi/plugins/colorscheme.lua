@@ -8,22 +8,23 @@ require("rose-pine").setup({
 })
 
 require("tokyonight").setup({
-    variant = "storm",
+    style = "storm",
     styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
+        comments = {
+            italic = true,
+        },
+        keywords = {
+            italic = true,
+        },
         functions = {},
         variables = {},
-        sidebars = "dark", -- style for sidebars, see below
-        floats = "dark", -- style for floating windows
+        sidebars = "dark",
+        floats = "dark",
     },
+    transparent = true,
 })
 
-function ColorMyNvim()
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
-    vim.cmd("colorscheme rose-pine")
-end
-
-ColorMyNvim()
+vim.cmd.colorscheme("tokyonight")
