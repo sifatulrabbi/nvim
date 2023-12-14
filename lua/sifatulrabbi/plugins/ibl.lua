@@ -1,11 +1,11 @@
 local ibl_highlight = {
-    'CursorColumn',
-    'Whitespace',
+    "CursorColumn",
+    "Whitespace",
 }
-require('ibl').setup({
+require("ibl").setup({
     indent = {
         highlight = ibl_highlight,
-        char = '',
+        char = "",
     },
     whitespace = {
         highlight = ibl_highlight,

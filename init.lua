@@ -1,1 +1,1 @@
-require('sifatulrabbi')
+require("sifatulrabbi")
