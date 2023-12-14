@@ -1,4 +1,12 @@
-require("mason").setup()
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
+    },
+})
 require("mason-lspconfig").setup()
 require("neodev").setup()
 
@@ -53,7 +61,6 @@ local servers = {
         },
     },
     pyright = {
-        filetypes = { "python" },
         settings = {
             python = {
                 analysis = {
@@ -61,17 +68,12 @@ local servers = {
                     diagnosticMode = "workspace",
                     useLibraryCodeForTypes = true,
                 },
-                formatting = {
-                    provider = "black",
-                },
             },
         },
     },
     rust_analyzer = {},
     tsserver = {},
-    eslint = {
-        filetypes = { "javascript", "typescript", "vue", "tsx" },
-    },
+    eslint = {},
     html = { filetypes = { "html", "twig", "hbs" } },
     htmx = {},
     volar = {},
@@ -84,9 +86,7 @@ local servers = {
     },
     dockerls = {},
     docker_compose_language_service = {},
-    jsonls = {
-        filetypes = { "json" },
-    },
+    jsonls = {},
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
