@@ -1,7 +1,4 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-require("sifatulrabbi.settings")
+require("sifatulrabbi.options")
 
 -- `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -47,16 +44,16 @@ require("lazy").setup({
         },
     },
     { "mfussenegger/nvim-lint" },
-    { "folke/which-key.nvim", opts = {} },
+    {
+        "folke/which-key.nvim",
+        opts = {},
+    },
     {
         "lewis6991/gitsigns.nvim",
         name = "gitsigns",
     },
-    {
-        "rose-pine/neovim",
-        name = "rose-pine",
-    },
     { "folke/tokyonight.nvim" },
+    { "ellisonleao/gruvbox.nvim" },
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
