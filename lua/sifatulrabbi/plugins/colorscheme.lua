@@ -1,16 +1,12 @@
 require("tokyonight").setup({
     style = "storm",
     styles = {
-        comments = {
-            italic = true,
-        },
-        keywords = {
-            italic = true,
-        },
+        comments = { italic = true },
+        keywords = { italic = true },
         functions = {},
         variables = {},
-        sidebars = "dark",
-        floats = "dark",
+        sidebars = "transparent",
+        floats = "transparent",
     },
     transparent = true,
 })
@@ -30,7 +26,7 @@ require("gruvbox").setup({
     },
 })
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("tokyonight")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
