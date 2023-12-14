@@ -32,3 +32,19 @@ require("conform").setup({
         sh = { "shfmt" },
     },
 })
+
+local conform = require("conform")
+
+conform.formatters.stylua = {
+    args = {
+        "--indent-type",
+        "Spaces",
+        "--indent-width",
+        "4",
+        "--column-width",
+        "80",
+        "--quote-style",
+        "ForceDouble",
+        "-",
+    },
+}
