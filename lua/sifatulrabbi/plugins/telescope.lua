@@ -59,3 +59,7 @@ vim.keymap.set( "n", "<leader>fg", ts_builtin.git_files, { desc = "Search [g]it 
 vim.keymap.set( "n", "<leader>ff", ts_builtin.find_files, { desc = "Search [f]iles" })
 vim.keymap.set( "n", "<leader>fh", ts_builtin.help_tags, { desc = "Search [h]elp" })
 vim.keymap.set( "n", "<leader>fw", ts_builtin.grep_string, { desc = "Search current [w]ord" })
+
+vim.keymap.set("n", "<leader>key", ts_builtin.keymaps, { desc = "Normal mode keymaps" })
+vim.keymap.set("n", "<leader>spell", ts_builtin.spell_suggest, { desc = "Suggest spellings" })
+vim.keymap.set("n", "<leader>gs", ts_builtin.git_status, { desc = "Git status" })

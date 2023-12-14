@@ -22,8 +22,6 @@ vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open 
 
 vim.keymap.set( "n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 
-vim.keymap.set("n", "<leader>gf", function() vim.cmd("Git") end, { desc = "Open git fugitive" })
-
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Lazy" })
 
