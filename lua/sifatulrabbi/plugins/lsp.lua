@@ -17,22 +17,21 @@ local on_attach = function(_, bufnr)
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
+    nmap("<leader>ds", ts_builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+    nmap("<leader>ws", ts_builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
     nmap("gd", ts_builtin.lsp_definitions, "[G]oto [D]efinition")
     nmap("gr", ts_builtin.lsp_references, "[G]oto [R]eferences")
     nmap("gi", ts_builtin.lsp_implementations, "[G]oto [I]mplementation")
     nmap("gD", ts_builtin.lsp_type_definitions, "Type [D]efinition")
-    nmap("<leader>ds", ts_builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
-    nmap("<leader>ws", ts_builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
-    -- Show hover info when in normal mode.
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-    -- Show signature help when in insert mode.
-    vim.keymap.set("i", "<C-k", function()
-        vim.lsp.buf.signature_help()
-    end, { desc = "Signature Documentation" })
 
-    -- Lesser used LSP functionality
-    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+    -- stylua: ignore
+    vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { desc = "Signature Documentation" })
+
+    -- start any available linters
+    require("lint").try_lint()
 end
 
 -- Enable the following language servers
@@ -49,6 +48,7 @@ local servers = {
                 },
                 staticcheck = true,
                 gofumpt = true,
+                goimports = true,
             },
         },
     },
@@ -84,6 +84,9 @@ local servers = {
     },
     dockerls = {},
     docker_compose_language_service = {},
+    jsonls = {
+        filetypes = { "json" },
+    },
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

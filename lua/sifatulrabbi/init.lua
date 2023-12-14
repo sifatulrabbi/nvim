@@ -135,7 +135,7 @@ require("lazy").setup({
 
     { "kyazdani42/nvim-web-devicons" },
 
-    { "stevearc/conform.nvim" },
+    { "stevearc/conform.nvim", opts = {} },
 }, {})
 
 -- [[ Highlight on yank ]]

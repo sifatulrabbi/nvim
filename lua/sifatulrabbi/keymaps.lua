@@ -24,3 +24,6 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo t
 
 -- stylua: ignore
 vim.keymap.set("n", "<leader>gf", function() vim.cmd("Git") end, { desc = "Open git fugitive" })
+
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Lazy" })
