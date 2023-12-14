@@ -25,6 +25,9 @@ require("gruvbox").setup({
     },
     bold = false,
     transparent_mode = true,
+    overrides = {
+        String = { fg = "#aaaaaa" },
+    },
 })
 
 vim.cmd.colorscheme("gruvbox")
