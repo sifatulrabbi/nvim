@@ -20,9 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
-
     "tpope/vim-sleuth",
-
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -34,7 +32,6 @@ require("lazy").setup({
             "folke/neodev.nvim",
         },
     },
-
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -49,36 +46,27 @@ require("lazy").setup({
             "hrsh7th/cmp-buffer", -- for buffer completions
         },
     },
-
     { "mfussenegger/nvim-lint" },
-
     { "folke/which-key.nvim", opts = {} },
-
     {
         "lewis6991/gitsigns.nvim",
         name = "gitsigns",
     },
-
     {
         "rose-pine/neovim",
         name = "rose-pine",
     },
-
     { "folke/tokyonight.nvim" },
-
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
     },
-
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {},
     },
-
     { "numToStr/Comment.nvim", opts = {} },
-
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
@@ -92,7 +80,6 @@ require("lazy").setup({
             },
         },
     },
-
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
@@ -100,14 +87,12 @@ require("lazy").setup({
         },
         build = ":TSUpdate",
     },
-
     {
         "nvim-treesitter/nvim-treesitter-context",
         config = function()
             vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
         end,
     },
-
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -117,24 +102,18 @@ require("lazy").setup({
             harpoon:setup({})
         end,
     },
-
     {
         "mbbill/undotree",
         config = function() end,
     },
-
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
-
     { "jose-elias-alvarez/typescript.nvim" },
-
     { "kyazdani42/nvim-web-devicons" },
-
     { "stevearc/conform.nvim", opts = {} },
-
     {
         "mfussenegger/nvim-dap",
         dependencies = {
