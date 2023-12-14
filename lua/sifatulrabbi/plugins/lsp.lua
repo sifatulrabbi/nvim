@@ -4,6 +4,8 @@ require("neodev").setup()
 
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
+    local ts_builtin = require("telescope.builtin")
+
     local nmap = function(keys, func, desc)
         if desc then
             desc = "LSP: " .. desc
@@ -15,12 +17,12 @@ local on_attach = function(_, bufnr)
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-    nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-    nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-    nmap("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-    nmap("gD", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-    nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-    nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+    nmap("gd", ts_builtin.lsp_definitions, "[G]oto [D]efinition")
+    nmap("gr", ts_builtin.lsp_references, "[G]oto [R]eferences")
+    nmap("gi", ts_builtin.lsp_implementations, "[G]oto [I]mplementation")
+    nmap("gD", ts_builtin.lsp_type_definitions, "Type [D]efinition")
+    nmap("<leader>ds", ts_builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+    nmap("<leader>ws", ts_builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
     -- Show hover info when in normal mode.
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -31,11 +33,6 @@ local on_attach = function(_, bufnr)
 
     -- Lesser used LSP functionality
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-        vim.lsp.buf.format()
-    end, { desc = "Format current buffer with LSP" })
 end
 
 -- Enable the following language servers
@@ -56,6 +53,7 @@ local servers = {
         },
     },
     pyright = {
+        filetypes = { "python" },
         settings = {
             python = {
                 analysis = {
@@ -71,11 +69,13 @@ local servers = {
     },
     rust_analyzer = {},
     tsserver = {},
-    eslint = {},
+    eslint = {
+        filetypes = { "javascript", "typescript", "vue", "tsx" },
+    },
     html = { filetypes = { "html", "twig", "hbs" } },
     htmx = {},
     volar = {},
-    cssls = { filetypes = { "scss", "css" } },
+    cssls = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },

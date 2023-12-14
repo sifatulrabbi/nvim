@@ -3,8 +3,6 @@ neoconf.nvim
 neodev.nvim
 nui.nvim
 nvim-lint
-nvim-notify
-nvim-spectre
 nvim-treesitter-textobjects
 nvim-ts-autotag
 nvim-ts-context-commentstring

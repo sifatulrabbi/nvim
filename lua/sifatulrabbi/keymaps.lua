@@ -19,3 +19,8 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "" })
 vim.keymap.set("n", "<leader>l", function()
     vim.cmd("Lazy")
 end, { desc = "Open Lazy menu" })
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
+
+-- stylua: ignore
+vim.keymap.set("n", "<leader>gf", function() vim.cmd("Git") end, { desc = "Open git fugitive" })

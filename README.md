@@ -1,6 +1,6 @@
 # My Neovim configs
 
-> Switched over to nvim at November 20, 2023.
+> Switched over to Neovim at November 20, 2023.
 
 ## Configs
 

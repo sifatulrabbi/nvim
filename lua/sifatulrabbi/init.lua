@@ -4,7 +4,7 @@ vim.g.maplocalleader = " "
 require("sifatulrabbi.settings")
 require("sifatulrabbi.keymaps")
 
---    `:help lazy.nvim.txt` for more info
+-- `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -69,14 +69,7 @@ require("lazy").setup({
 
     {
         "nvim-lualine/lualine.nvim",
-        opts = {
-            options = {
-                icons_enabled = false,
-                theme = "auto",
-                component_separators = "|",
-                section_separators = "",
-            },
-        },
+        event = "VeryLazy",
     },
 
     {
@@ -142,10 +135,7 @@ require("lazy").setup({
 
     { "kyazdani42/nvim-web-devicons" },
 
-    require("sifatulrabbi.plugins.autoformat"),
-    require("sifatulrabbi.plugins.debug"),
-
-    -- { import = 'custom.plugins' },
+    { "stevearc/conform.nvim" },
 }, {})
 
 -- [[ Highlight on yank ]]
@@ -159,17 +149,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
 })
 
-require("sifatulrabbi.plugins.lsp")
-require("sifatulrabbi.plugins.cmp")
-require("sifatulrabbi.plugins.colors")
-require("sifatulrabbi.plugins.harpoon")
-require("sifatulrabbi.plugins.treesitter")
-require("sifatulrabbi.plugins.telescope")
-require("sifatulrabbi.plugins.ibl")
-require("sifatulrabbi.plugins.gitsigns")
-require("sifatulrabbi.plugins.which-key")
-require("sifatulrabbi.plugins.git-fugitive")
-require("sifatulrabbi.plugins.undotree")
+require("sifatulrabbi.plugins")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
