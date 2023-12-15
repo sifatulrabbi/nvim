@@ -3,8 +3,8 @@ vim.g.maplocalleader = " "
 vim.opt.guicursor = ""
 vim.o.background = "dark"
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+-- vim.opt.nu = true
+-- vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -40,3 +40,6 @@ vim.o.spell = true
 vim.o.spelllang = "en_us"
 
 vim.wo.conceallevel = 0
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
