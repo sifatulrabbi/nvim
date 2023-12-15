@@ -28,6 +28,8 @@ vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open [m]ason" })
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa!<CR>", { desc = "Exit neovim" })
 
+vim.api.nvim_set_keymap( "n", "<leader>z", ":ZenMode<CR>", { noremap = true, silent = true })
+
 local function set_dap_keymaps(dap, dapui)
     vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
     vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })

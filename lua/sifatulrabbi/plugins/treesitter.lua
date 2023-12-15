@@ -38,5 +38,5 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("treesitter-context").setup({
-    max_lines = 8,
+    max_lines = 7,
 })

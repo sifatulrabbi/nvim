@@ -122,3 +122,13 @@ hooks.register(
     hooks.type.SCOPE_HIGHLIGHT,
     hooks.builtin.scope_highlight_from_extmark
 )
+
+require("zen-mode").setup({
+    window = {
+        width = 80,
+        height = 1,
+    },
+    plugins = {
+        twilight = { enabled = true },
+    },
+})
