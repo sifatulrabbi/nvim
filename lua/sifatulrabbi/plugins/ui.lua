@@ -128,7 +128,4 @@ require("zen-mode").setup({
         width = 80,
         height = 1,
     },
-    plugins = {
-        twilight = { enabled = true },
-    },
 })
