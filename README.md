@@ -6,5 +6,11 @@
 
 - Basic keymaps.
 - LSP with autoformatting.
-- Color scheme.
 - Common Git stuff.
+- Color scheme.
+
+## Requirements
+
+```bash
+brew install ripgrep fd
+```

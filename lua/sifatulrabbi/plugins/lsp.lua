@@ -12,8 +12,6 @@ require("neodev").setup()
 
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-    local ts_builtin = require("telescope.builtin")
-
     local nmap = function(keys, func, desc)
         if desc then
             desc = "LSP: " .. desc
@@ -22,21 +20,11 @@ local on_attach = function(_, bufnr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
     end
 
-    nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-    nmap("<leader>ds", ts_builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
-    nmap("<leader>ws", ts_builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
-    nmap("gd", ts_builtin.lsp_definitions, "[G]oto [D]efinition")
-    nmap("gr", ts_builtin.lsp_references, "[G]oto [R]eferences")
-    nmap("gi", ts_builtin.lsp_implementations, "[G]oto [I]mplementation")
-    nmap("gD", ts_builtin.lsp_type_definitions, "Type [D]efinition")
-
+    nmap("<leader>rn", vim.lsp.buf.rename, "Re[n]ame")
+    nmap("<leader>ca", vim.lsp.buf.code_action, "Code [A]ction")
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-
     -- stylua: ignore
-    vim.keymap.set("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { desc = "Signature Documentation" })
+    vim.keymap.set( "i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
 
     -- start any available linters
     require("lint").try_lint()

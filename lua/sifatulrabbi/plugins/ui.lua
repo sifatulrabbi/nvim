@@ -1,12 +1,6 @@
 -- document existing key chains
 require("which-key").register({
-    ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-    ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-    ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-    ["<leader>h"] = { name = "More git", _ = "which_key_ignore" },
-    ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-    ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-    ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+    ["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
 })
 
 -- See `:help gitsigns.txt`
@@ -56,40 +50,15 @@ require("gitsigns").setup({
 
 require("lualine").setup({
     options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = "auto",
         component_separators = "|",
         section_separators = "",
         globalstatus = true,
-        disabled_filetypes = {
-            statusline = { "dashboard", "alpha", "starter" },
-        },
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+    },
+    sections = {
         lualine_c = {
-            { "diagnostics" },
-            {
-                "filetype",
-                icon_only = true,
-                separator = "",
-                padding = { left = 1, right = 0 },
-            },
-        },
-        lualine_x = {
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-            },
-        },
-        lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
-        },
-        lualine_z = {
-            function()
-                return " " .. os.date("%R")
-            end,
+            { "filename", path = 1 },
         },
     },
 })
@@ -125,7 +94,10 @@ hooks.register(
 
 require("zen-mode").setup({
     window = {
-        width = 80,
+        width = 120,
         height = 1,
+        options = {
+            wrap = false,
+        },
     },
 })
