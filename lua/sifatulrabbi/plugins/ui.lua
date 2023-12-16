@@ -101,3 +101,5 @@ require("zen-mode").setup({
         },
     },
 })
+
+require("neo-tree").setup({})
