@@ -34,8 +34,6 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.o.clipboard = "unnamedplus"
-
 vim.o.spell = true
 vim.o.spelllang = "en_us"
 
