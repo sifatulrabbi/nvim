@@ -101,16 +101,3 @@ require("zen-mode").setup({
         },
     },
 })
-
--- require("neo-tree").setup({
---     filesystem = {
---         filtered_items = {
---             hide_files = false,
---             hide_dotfiles = false,
---             visible = true,
---             never_show = {
---                 ".git",
---             },
---         },
---     },
--- })

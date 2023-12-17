@@ -12,7 +12,7 @@ local function restart_lsp_clients()
     end
 
     vim.defer_fn(function()
-        vim.cmd("e")
+        vim.cmd("e<CR>")
         print("Reloading the buffer...")
     end, 500)
 end
