@@ -26,9 +26,8 @@ vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open 
 vim.keymap.set( "n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 
 -- system clipboard
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Add to clipboard" })
-vim.keymap.set("n", "<leader>y", '"+yy', { desc = "Add to clipboard" })
-vim.keymap.set({"n","n"}, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Add to clipboard" })
+vim.keymap.set({"n","v"}, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open [l]azy" })
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open [m]ason" })
