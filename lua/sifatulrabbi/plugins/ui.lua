@@ -97,7 +97,7 @@ require("zen-mode").setup({
         width = 120,
         height = 1,
         options = {
-            wrap = false,
+            wrap = true,
         },
     },
 })

@@ -11,6 +11,13 @@
 
 ## Requirements
 
+Following dependencies are required for the config and the plugins to work.
+
+- `ripgrep`
+- `fd`
+- `cmake` or `make`
+
 ```bash
+# macos
 brew install ripgrep fd
 ```
