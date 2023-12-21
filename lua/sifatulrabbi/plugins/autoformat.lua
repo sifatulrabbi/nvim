@@ -13,14 +13,20 @@ require("conform").setup({
 
         -- Disable autoformat for files in a certain path
         local bufname = vim.api.nvim_buf_get_name(bufnr)
-        if bufname:match("/node_modules/") or bufname:match("/.venv/") then
+        if
+            bufname:match("/node_modules/")
+            or bufname:match("/.venv/")
+            or bufname:match("/build/")
+            or bufname:match("/dist/")
+            or bufname:match("/.cache/")
+        then
             return
         end
 
         return { lsp_fallback = true }
     end,
     formatters_by_ft = {
-        go = { "gofumpt", "goimports-reviser" },
+        go = { "gofumpt", "goimports", "goimports-reviser" },
         python = { "black" },
         typescript = { "prettier" },
         javascript = { "prettier" },

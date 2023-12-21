@@ -15,7 +15,11 @@ require("mason-nvim-dap").setup({
 -- Dap UI setup
 -- For more information, see |:help nvim-dap-ui|
 dapui.setup({
-    icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
+    icons = {
+        expanded = "▾",
+        collapsed = "▸",
+        current_frame = "*",
+    },
     controls = {
         icons = {
             pause = "⏸",
