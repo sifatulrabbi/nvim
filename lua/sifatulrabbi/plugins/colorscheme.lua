@@ -26,8 +26,14 @@ require("gruvbox").setup({
     },
 })
 
+require("catppuccin").setup({
+    show_end_of_buffer = true,
+    no_bold = true,
+})
+
 -- vim.cmd.colorscheme("tokyonight")
-vim.cmd.colorscheme("gruvbox")
+-- vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("catppuccin")
 
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

@@ -54,6 +54,7 @@ require("lazy").setup({
     },
     { "folke/tokyonight.nvim" },
     { "ellisonleao/gruvbox.nvim" },
+    { "catppuccin/nvim", name = "catppuccin" },
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",

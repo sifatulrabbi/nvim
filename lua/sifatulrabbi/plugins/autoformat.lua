@@ -36,7 +36,6 @@ require("conform").setup({
         html = { "prettier" },
         yaml = { "prettier" },
         lua = { "stylua" },
-        fish = { "fish_indent" },
         sh = { "shfmt" },
     },
 })
