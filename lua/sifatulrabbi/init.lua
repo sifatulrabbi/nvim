@@ -52,7 +52,6 @@ require("lazy").setup({
         "lewis6991/gitsigns.nvim",
         name = "gitsigns",
     },
-    { "folke/tokyonight.nvim" },
     { "ellisonleao/gruvbox.nvim" },
     { "catppuccin/nvim", name = "catppuccin" },
     {

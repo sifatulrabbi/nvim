@@ -1,16 +1,3 @@
-require("tokyonight").setup({
-    style = "storm",
-    styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-        functions = {},
-        variables = {},
-        sidebars = "transparent",
-        floats = "transparent",
-    },
-    transparent = true,
-})
-
 require("gruvbox").setup({
     italic = {
         strings = false,
@@ -31,7 +18,6 @@ require("catppuccin").setup({
     no_bold = true,
 })
 
--- vim.cmd.colorscheme("tokyonight")
 -- vim.cmd.colorscheme("gruvbox")
 vim.cmd.colorscheme("catppuccin")
 
