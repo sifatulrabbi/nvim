@@ -22,3 +22,8 @@ vim.api.nvim_create_user_command(
     restart_lsp_clients,
     { nargs = 0 }
 )
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewRead" }, {
+    pattern = "*.conf",
+    command = "set filetype=nginx",
+})
