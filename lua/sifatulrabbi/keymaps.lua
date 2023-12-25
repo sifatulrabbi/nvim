@@ -25,6 +25,8 @@ vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open 
 
 vim.keymap.set( "n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 
+vim.keymap.set("n", "<leader>x", ":Ex<CR>", { desc = "Open Netrw", noremap = true, silent = true })
+
 -- system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Add to clipboard" })
 vim.keymap.set({"n","v"}, "<leader>p", '"+p', { desc = "Paste from clipboard" })
