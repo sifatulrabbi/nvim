@@ -22,3 +22,10 @@ vim.api.nvim_create_user_command(
     restart_lsp_clients,
     { nargs = 0 }
 )
+
+vim.keymap.set(
+    "n",
+    "<leader>rr",
+    restart_lsp_clients,
+    { desc = "LSP: [r]estart servers", noremap = true, silent = true }
+)
