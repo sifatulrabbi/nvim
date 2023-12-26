@@ -17,11 +17,17 @@ local function restart_lsp_clients()
     end, 500)
 end
 
+local function save_and_exit()
+    vim.cmd("w")
+    vim.cmd("Ex")
+end
+
 vim.api.nvim_create_user_command(
     "RestartLSP",
     restart_lsp_clients,
     { nargs = 0 }
 )
+vim.api.nvim_create_user_command("W", save_and_exit, { nargs = 0 })
 
 vim.keymap.set(
     "n",
