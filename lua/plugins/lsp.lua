@@ -4,10 +4,9 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            { "j-hui/fidget.nvim", opts = {} },
             "folke/neodev.nvim",
+            { "j-hui/fidget.nvim", opts = {} },
         },
-        opts = {},
         config = function()
             require("mason").setup({
                 ui = {

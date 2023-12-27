@@ -3,7 +3,6 @@ return {
     "tpope/vim-rhubarb",
     "tpope/vim-sleuth",
 
-
     { "numToStr/Comment.nvim", opts = {} },
 
     {
@@ -14,8 +13,10 @@ return {
 
     {
         "ThePrimeagen/harpoon",
+        lazy = false,
         branch = "harpoon2",
         requires = { { "nvim-lua/plenary.nvim" } },
+        opts = {},
         config = function()
             local harpoon = require("harpoon")
 

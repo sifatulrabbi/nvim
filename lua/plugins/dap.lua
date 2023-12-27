@@ -8,40 +8,40 @@ return {
             "leoluz/nvim-dap-go",
             "theHamsta/nvim-dap-virtual-text",
         },
-        opts = {
-            icons = {
-                expanded = "▾",
-                collapsed = "▸",
-                current_frame = "*",
-            },
-            controls = {
-                icons = {
-                    pause = "⏸",
-                    play = "▶",
-                    step_into = "⏎",
-                    step_over = "⏭",
-                    step_out = "⏮",
-                    step_back = "b",
-                    run_last = "▶▶",
-                    terminate = "⏹",
-                    disconnect = "⏏",
-                },
-            },
-        },
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
 
-            dapui.setup({})
-            require("mason-nvim-dap").setup{
+            require("nvim-dap-virtual-text").setup({})
+            require("mason-nvim-dap").setup({
                 automatic_installation = true,
                 automatic_setup = true,
                 handlers = {},
                 ensure_installed = {
                     "delve",
                 },
-            }
-            require("nvim-dap-virtual-text").setup({})
+            })
+
+            dapui.setup({
+                icons = {
+                    expanded = "▾",
+                    collapsed = "▸",
+                    current_frame = "*",
+                },
+                controls = {
+                    icons = {
+                        pause = "⏸",
+                        play = "▶",
+                        step_into = "⏎",
+                        step_over = "⏭",
+                        step_out = "⏮",
+                        step_back = "b",
+                        run_last = "▶▶",
+                        terminate = "⏹",
+                        disconnect = "⏏",
+                    },
+                },
+            })
 
             dap.listeners.after.event_initialized["dapui_config"] = dapui.open
             dap.listeners.before.event_terminated["dapui_config"] = dapui.close

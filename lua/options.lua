@@ -38,3 +38,7 @@ vim.o.spell = true
 vim.o.spelllang = "en_us"
 
 vim.wo.conceallevel = 0
+
+-- for transparent bg support
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

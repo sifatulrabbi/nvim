@@ -67,29 +67,27 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         name = "gitsigns",
-        opts = {
-            signs = {
-                add = { text = "+" },
-                change = { text = "│" },
-                delete = { text = "_" },
-                topdelete = { text = "‾" },
-                changedelete = { text = "~" },
-                untracked = { text = "┆" },
-            },
-            on_attach = function(bufnr)
-                vim.keymap.set(
-                    "n",
-                    "<leader>hp",
-                    require("gitsigns").preview_hunk,
-                    { buffer = bufnr, desc = "Preview git hunk" }
-                )
+        config = function()
+            require("gitsigns").setup({
+                signs = {
+                    add = { text = "+" },
+                    change = { text = "│" },
+                    delete = { text = "_" },
+                    topdelete = { text = "‾" },
+                    changedelete = { text = "~" },
+                    untracked = { text = "┆" },
+                },
+                on_attach = function(bufnr)
+                    vim.keymap.set(
+                        "n",
+                        "<leader>hp",
+                        require("gitsigns").preview_hunk,
+                        { buffer = bufnr, desc = "Preview git hunk" }
+                    )
 
-                -- don't override the built-in and fugitive keymaps
-                local gs = package.loaded.gitsigns
-                vim.keymap.set(
-                    { "n", "v" },
-                    "]c",
-                    function()
+                    -- don't override the built-in and fugitive keymaps
+                    local gs = package.loaded.gitsigns
+                    vim.keymap.set({ "n", "v" }, "]c", function()
                         if vim.wo.diff then
                             return "]c"
                         end
@@ -97,27 +95,30 @@ return {
                             gs.next_hunk()
                         end)
                         return "<Ignore>"
-                    end,
-                    { expr = true, buffer = bufnr, desc = "Jump to next hunk" }
-                )
-                vim.keymap.set({ "n", "v" }, "[c", function()
-                    if vim.wo.diff then
-                        return "[c"
-                    end
-                    vim.schedule(function()
-                        gs.prev_hunk()
-                    end)
-                    return "<Ignore>"
-                end, {
-                    expr = true,
-                    buffer = bufnr,
-                    desc = "Jump to previous hunk",
-                })
-            end,
-        },
+                    end, {
+                        expr = true,
+                        buffer = bufnr,
+                        desc = "Jump to next hunk",
+                    })
+                    vim.keymap.set({ "n", "v" }, "[c", function()
+                        if vim.wo.diff then
+                            return "[c"
+                        end
+                        vim.schedule(function()
+                            gs.prev_hunk()
+                        end)
+                        return "<Ignore>"
+                    end, {
+                        expr = true,
+                        buffer = bufnr,
+                        desc = "Jump to previous hunk",
+                    })
+                end,
+            })
+        end,
     },
 
-    { "kyazdani42/nvim-web-devicons" },
+    { "kyazdani42/nvim-web-devicons", opts = {} },
 
     {
         "folke/zen-mode.nvim",
@@ -130,5 +131,13 @@ return {
                 },
             },
         },
+        config = function()
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader>z",
+                ":ZenMode<CR>",
+                { noremap = true, silent = true }
+            )
+        end,
     },
 }

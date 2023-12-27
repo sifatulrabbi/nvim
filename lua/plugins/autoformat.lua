@@ -60,6 +60,13 @@ return {
                     "-",
                 },
             }
+
+            -- run conform with :Format command
+            vim.api.nvim_create_user_command(
+                "Format",
+                require("conform").format,
+                { nargs = 0 }
+            )
         end,
     },
 }

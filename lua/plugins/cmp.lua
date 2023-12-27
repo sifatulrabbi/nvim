@@ -12,7 +12,7 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
         },
-        opts = function()
+        config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
 

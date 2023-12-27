@@ -1,6 +1,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
         version = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -10,13 +11,16 @@ return {
                 enabled = vim.fn.executable("make") == 1,
             },
         },
+        lazy = false,
         opts = {},
         config = function()
+            -- See `:help telescope` and `:help telescope.setup()`
+            -- require("telescope").setup({})
+
             -- Enable telescope fzf native, if installed
             pcall(require("telescope").load_extension, "fzf")
 
             local ts_builtin = require("telescope.builtin")
-
             -- stylua: ignore start
             -- searching files, words, tags
             vim.keymap.set("n", "<leader>fg", ts_builtin.live_grep, { desc = "Live [g]rep" })
