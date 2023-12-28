@@ -23,6 +23,7 @@ return {
                     "vue",
                     "scss",
                     "go",
+                    "make",
                 },
                 auto_install = true,
                 highlight = { enable = true },

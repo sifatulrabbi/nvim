@@ -42,3 +42,11 @@ vim.wo.conceallevel = 0
 -- for transparent bg support
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+-- whitespace rendering
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+-- vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("tab:|  ")
+
+vim.cmd("highlight Whitespace guifg=#3a3a41")
