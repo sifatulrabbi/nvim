@@ -15,7 +15,24 @@ return {
         opts = {},
         config = function()
             -- See `:help telescope` and `:help telescope.setup()`
-            -- require("telescope").setup({})
+            require("telescope").setup({
+                defaults = {
+                    layout_config = {
+                        horizontal = {
+                            preview_width = 0.5,
+                            results_width = 0.5,
+                        },
+                    },
+                },
+                pickers = {
+                    find_files = {
+                        find_command = { "fd", "-H", "-t", "f" },
+                    },
+                    current_buffer_fuzzy_find = {
+                        theme = "dropdown",
+                    },
+                },
+            })
 
             -- Enable telescope fzf native, if installed
             pcall(require("telescope").load_extension, "fzf")
@@ -25,7 +42,7 @@ return {
             -- searching files, words, tags
             vim.keymap.set("n", "<leader>fg", ts_builtin.live_grep, { desc = "Live [g]rep" })
             vim.keymap.set("n", "<leader>ff", ts_builtin.find_files, { desc = "Search [f]iles" })
-            vim.keymap.set("n", "<leader>fb", ts_builtin.current_buffer_fuzzy_find , { desc = "Fuzzily search in current buffer" })
+            vim.keymap.set("n", "<leader>/", ts_builtin.current_buffer_fuzzy_find , { desc = "Fuzzily search in current buffer" })
             vim.keymap.set("n", "<leader>fh", ts_builtin.help_tags, { desc = "Search [h]elp" })
 
             -- helpful telescope features
