@@ -6,51 +6,28 @@ return {
             require("catppuccin").setup({
                 show_end_of_buffer = true,
                 no_bold = true,
-                transparent_background = true,
+                transparent_background = false,
             })
 
             vim.cmd.colorscheme("catppuccin")
         end,
     },
 
-    -- {
-    --     "rose-pine/neovim",
-    --     name = "rose-pine",
-    --     opts = {
-    --         style = "storm",
-    --         styles = {
-    --             comments = { italic = true },
-    --             keywords = { italic = true },
-    --             functions = {},
-    --             variables = {},
-    --             sidebars = "transparent",
-    --             floats = "transparent",
-    --         },
-    --         transparent = true,
-    --     },
-    --     config = function()
-    --         -- vim.cmd.colorscheme("rose-pine")
-    --     end,
-    -- },
+    {
+        "rose-pine/neovim",
+        as = "rose-pine",
+        opts = {},
+        config = function()
+            require("rose-pine").setup({
+                variant = "main",
+                dark_variant = "main",
+                dim_nc_background = false,
+                disable_background = false,
+                disable_float_background = false,
+                disable_italics = false,
+            })
 
-    -- {
-    --     "ellisonleao/gruvbox.nvim",
-    --     opts = {
-    --         italic = {
-    --             strings = false,
-    --             emphasis = false,
-    --             comments = true,
-    --             operators = false,
-    --             folds = true,
-    --         },
-    --         bold = false,
-    --         transparent_mode = false,
-    --         overrides = {
-    --             -- String = { fg = "#aaaaaa" },
-    --         },
-    --     },
-    --     config = function()
-    --         -- vim.cmd.colorscheme("gruvbox")
-    --     end,
-    -- },
+            -- vim.cmd.colorscheme("rose-pine")
+        end,
+    },
 }
