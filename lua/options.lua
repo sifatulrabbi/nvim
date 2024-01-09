@@ -53,4 +53,3 @@ vim.cmd("highlight Whitespace guifg=#3a3a41")
 
 -- netrw options
 vim.api.nvim_set_var("netrw_banner", 0)
-vim.api.nvim_set_var("netrw_liststyle", 1)
