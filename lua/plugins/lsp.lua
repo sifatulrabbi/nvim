@@ -116,5 +116,5 @@ return {
         end,
     },
 
-    { "jose-elias-alvarez/typescript.nvim", opts = {} },
+    -- { "jose-elias-alvarez/typescript.nvim", opts = {} },
 }
