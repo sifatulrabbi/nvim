@@ -35,6 +35,7 @@ return {
                     python = { "black" },
                     typescript = { "prettier" },
                     javascript = { "prettier" },
+                    vue = { "prettier" },
                     typescriptreact = { "prettier" },
                     javascriptreact = { "prettier" },
                     json = { "prettier" },
