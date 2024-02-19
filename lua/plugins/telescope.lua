@@ -26,7 +26,18 @@ return {
                 },
                 pickers = {
                     find_files = {
-                        find_command = { "fd", "-H", "-t", "f", "--exclude", ".git", "--exclude", "node_modules", "--exclude", ".venv" },
+                        find_command = {
+                            "fd",
+                            "-H",
+                            "-t",
+                            "f",
+                            "--exclude",
+                            ".git",
+                            "--exclude",
+                            "node_modules",
+                            "--exclude",
+                            ".venv",
+                        },
                     },
                     current_buffer_fuzzy_find = {
                         theme = "dropdown",
