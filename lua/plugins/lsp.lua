@@ -88,7 +88,8 @@ return {
                 },
                 dockerls = {},
                 docker_compose_language_service = {},
-                jsonls = {},
+                jsonls = { filetypes = { "json" } },
+                sqls = { filetypes = { "sql", "cql" } },
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

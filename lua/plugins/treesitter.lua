@@ -22,11 +22,19 @@ return {
                     "bash",
                     "vue",
                     "scss",
+                    "css",
                     "go",
                     "make",
+                    "sql",
+                    "yaml",
+                    "json",
                 },
+                sync_install = false,
                 auto_install = true,
-                highlight = { enable = true },
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
                 indent = { enable = true },
                 incremental_selection = {
                     enable = true,
@@ -40,8 +48,11 @@ return {
                 textobjects = {
                     select = {
                         enable = true,
-                        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+                        lookahead = true,
                     },
+                },
+                custom_captures = {
+                    ["*.cql"] = "sql",
                 },
             })
         end,
@@ -53,10 +64,6 @@ return {
             max_lines = 7,
         },
         config = function()
-            -- require("treesitter-context").setup({
-            --     max_lines = 7,
-            -- })
-
             vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
         end,
     },

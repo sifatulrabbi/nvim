@@ -53,3 +53,22 @@ vim.cmd("highlight Whitespace guifg=#3a3a41")
 
 -- netrw options
 vim.api.nvim_set_var("netrw_banner", 0)
+
+-- custom file types
+vim.filetype.add({
+    extension = {
+        mdx = "mdx",
+        log = "log",
+        conf = "conf",
+        env = "dotenv",
+        cql = "sql",
+    },
+    filename = {
+        ["tsconfig.json"] = "jsonc",
+    },
+    -- Detect and apply filetypes based on certain patterns of the filenames
+    pattern = {
+        ["%.env%.[%w_.-]+"] = "dotenv",
+        ["*.cql"] = "sql",
+    },
+})

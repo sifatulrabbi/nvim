@@ -46,6 +46,7 @@ return {
                     scss = { "prettier" },
                     lua = { "stylua" },
                     sh = { "shfmt" },
+                    cql = { "sql-formatter" },
                 },
             })
 
