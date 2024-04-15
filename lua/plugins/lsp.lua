@@ -47,7 +47,6 @@ return {
 
             -- Enable the following language servers
             local servers = {
-                clangd = {},
                 gopls = {
                     filetypes = { "go", "gomod", "gowork", "gotmpl" },
                     settings = {
@@ -74,22 +73,42 @@ return {
                         },
                     },
                 },
-                rust_analyzer = {},
-                tsserver = {},
-                eslint = {},
-                html = { filetypes = { "html", "twig", "hbs" } },
-                volar = {},
-                cssls = {},
+                tsserver = {
+                    filetypes = {
+                        "javascript",
+                        "typescript",
+                        "vue",
+                        "jsx",
+                        "typescriptreact",
+                        "javascriptreact",
+                    },
+                },
+                html = {
+                    filetypes = { "html", "twig", "hbs", "vue" },
+                },
+                volar = {
+                    filetypes = { "vue", "javascript", "typescript" },
+                },
+                cssls = {
+                    filetypes = { "vue", "css", "scss" },
+                },
                 lua_ls = {
                     Lua = {
                         workspace = { checkThirdParty = false },
                         telemetry = { enable = false },
                     },
                 },
+                jsonls = {
+                    filetypes = { "json" },
+                },
+                sqls = {
+                    filetypes = { "sql", "cql" },
+                },
                 dockerls = {},
                 docker_compose_language_service = {},
-                jsonls = { filetypes = { "json" } },
-                sqls = { filetypes = { "sql", "cql" } },
+                eslint = {},
+                rust_analyzer = {},
+                clangd = {},
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
