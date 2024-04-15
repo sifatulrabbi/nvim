@@ -77,8 +77,13 @@ return {
                     filetypes = {
                         "javascript",
                         "typescript",
+                        "javascript.tsx",
+                        "typescript.tsx",
                         "vue",
                         "jsx",
+                        "html",
+                        "twig",
+                        "hbs",
                         "typescriptreact",
                         "javascriptreact",
                     },
@@ -87,7 +92,7 @@ return {
                     filetypes = { "html", "twig", "hbs", "vue" },
                 },
                 volar = {
-                    filetypes = { "vue", "javascript", "typescript" },
+                    filetypes = { "vue" },
                 },
                 cssls = {
                     filetypes = { "vue", "css", "scss" },
