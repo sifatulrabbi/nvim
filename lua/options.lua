@@ -2,8 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.guicursor = ""
 vim.o.background = "dark"
-
-vim.opt.nu = true
+vim.g.have_nerd_font = true
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -12,7 +11,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 300
 vim.o.timeout = true
 
 vim.opt.wrap = true
@@ -22,7 +21,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
@@ -45,9 +44,8 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- whitespace rendering
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
--- vim.opt.listchars:append("eol:↴")
-vim.opt.listchars:append("tab:|  ")
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
 
 vim.cmd("highlight Whitespace guifg=#3a3a41")
 
