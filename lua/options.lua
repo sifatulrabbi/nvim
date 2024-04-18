@@ -29,7 +29,7 @@ vim.opt.scrolloff = 8
 
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
+vim.opt.updatetime = 250
 
 vim.opt.colorcolumn = "80"
 
@@ -44,8 +44,7 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- whitespace rendering
 vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.cmd("highlight Whitespace guifg=#3a3a41")
 
