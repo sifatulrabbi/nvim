@@ -31,6 +31,9 @@ return {
                     { "type", "asc" },
                     { "name", "asc" },
                 },
+                is_always_hidden = function(name, bufnr)
+                    return name == ".git"
+                end,
             },
             columns = {
                 "icon",
