@@ -37,8 +37,8 @@ return {
             },
             columns = {
                 "icon",
-                -- "size",
-                -- "permissions",
+                "permissions",
+                "size",
                 -- "mtime",
             },
             lsp_file_methods = {
@@ -184,7 +184,7 @@ return {
             vim.api.nvim_set_keymap(
                 "n",
                 "<leader>z",
-                ":ZenMode<CR>",
+                "<cmd>ZenMode<CR>",
                 { noremap = true, silent = true }
             )
         end,
