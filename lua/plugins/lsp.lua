@@ -104,7 +104,7 @@ return {
                     },
                 },
                 jsonls = {
-                    filetypes = { "json" },
+                    filetypes = { "json", "jsonc" },
                 },
                 sqls = {
                     filetypes = { "sql", "cql" },

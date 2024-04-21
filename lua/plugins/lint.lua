@@ -14,6 +14,7 @@ return {
                 css = { "stylelint" },
                 scss = { "stylelint" },
                 json = { "jsonlint" },
+                jsonc = { "jsonlint" },
                 dockerfile = { "hadolint" },
             }
         end,
