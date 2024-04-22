@@ -3,6 +3,7 @@ vim.g.maplocalleader = " "
 vim.opt.guicursor = ""
 vim.o.background = "dark"
 vim.g.have_nerd_font = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -44,7 +45,8 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- whitespace rendering
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- "» "
+vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
 
 vim.cmd("highlight Whitespace guifg=#3a3a41")
 
