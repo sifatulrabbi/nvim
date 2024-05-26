@@ -68,8 +68,7 @@ return {
             vim.keymap.set("n", "gi", ts_builtin.lsp_implementations, { desc = "LSP: Goto [I]mplementation" })
             vim.keymap.set("n", "gD", ts_builtin.lsp_type_definitions, { desc = "LSP: Type [D]efinition" })
             vim.keymap.set("n", "<leader>fs", ts_builtin.lsp_document_symbols, { desc = "LSP: Document [S]ymbols" })
-            vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols,
-                { desc = "LSP: Workspace [S]ymbols" })
+            vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols, { desc = "LSP: Workspace [S]ymbols" })
         end,
     },
 }
