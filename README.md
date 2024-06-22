@@ -19,5 +19,11 @@ Following dependencies are required for the config and the plugins to work.
 
 ```bash
 # macos
-brew install ripgrep fd
+brew install ripgrep fd cmake fzf
+
+# arch
+sudo pacman -S ripgrep fd xsel xclip fzf
+
+# debian
+sudo apt install ripgrep fd-find xsel xclip fzf
 ```
