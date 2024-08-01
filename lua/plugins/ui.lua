@@ -106,11 +106,11 @@ return {
     {
         "folke/which-key.nvim",
         opts = {},
-        config = function()
-            require("which-key").register({
-                ["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
-            })
-        end,
+        -- config = function()
+        --     require("which-key").register({
+        --         ["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
+        --     })
+        -- end,
     },
 
     {
@@ -168,6 +168,8 @@ return {
     },
 
     { "kyazdani42/nvim-web-devicons", opts = {} },
+
+    { "echasnovski/mini.nvim", version = "*" },
 
     {
         "folke/zen-mode.nvim",
