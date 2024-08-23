@@ -21,10 +21,21 @@ return {
             require("rose-pine").setup({
                 variant = "main",
                 dark_variant = "main",
-                dim_nc_background = true,
+                -- dim_nc_background = true,
                 disable_background = true,
-                disable_float_background = false,
-                disable_italics = false,
+                disable_float_background = true,
+
+                enable = {
+                    terminal = true,
+                    legacy_highlights = true,
+                    migrations = true,
+                },
+
+                styles = {
+                    bold = true,
+                    italic = true,
+                    transparency = true,
+                },
             })
 
             vim.cmd.colorscheme("rose-pine")
