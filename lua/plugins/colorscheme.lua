@@ -6,7 +6,7 @@ return {
             require("catppuccin").setup({
                 show_end_of_buffer = true,
                 no_bold = true,
-                -- transparent_background = true,
+                transparent_background = true,
             })
 
             -- vim.cmd.colorscheme("catppuccin")
@@ -22,7 +22,7 @@ return {
                 variant = "main",
                 dark_variant = "main",
                 dim_nc_background = true,
-                disable_background = false,
+                disable_background = true,
                 disable_float_background = false,
                 disable_italics = false,
             })

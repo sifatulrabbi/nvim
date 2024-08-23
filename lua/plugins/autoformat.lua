@@ -18,14 +18,18 @@ return {
 
                     -- Disable autoformat for files in a certain path
                     local bufname = vim.api.nvim_buf_get_name(bufnr)
+                    local langtype = vim.bo[bufnr].filetype
                     if
                         bufname:match("/node_modules/")
                         or bufname:match("/.venv/")
                         or bufname:match("/build/")
                         or bufname:match("/dist/")
                         or bufname:match("/.cache/")
+                        or bufname:match("/tambi/")
                     then
-                        return
+                        if langtype == "python" then
+                            return
+                        end
                     end
 
                     return { lsp_fallback = true }
