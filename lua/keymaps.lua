@@ -28,10 +28,10 @@ vim.keymap.set("n", "<C-w>t", "<cmd>tabnew<CR>", { desc = "Create new empty tab"
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 
 -- move between windows using Ctrl+<move key>
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+-- vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+-- vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+-- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- vim.keymap.set("n", "-", "<cmd>Ex<CR>", { desc = "Open Netrw", noremap = true, silent = true })
