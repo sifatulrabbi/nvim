@@ -6,34 +6,45 @@ return {
             require("conform").setup({
                 format_after_save = function(bufnr)
                     -- Disable autoformat on certain filetypes
-                    -- local ignore_filetypes = { "sql", "java" }
-                    -- if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-                    --     return
-                    -- end
+                    local ignore_filetypes = { "sql" }
+                    if
+                        vim.tbl_contains(
+                            ignore_filetypes,
+                            vim.bo[bufnr].filetype
+                        )
+                    then
+                        return
+                    end
 
                     -- Disable with a global or buffer-local variable
-                    -- if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                    --     return
-                    -- end
+                    if
+                        vim.g.disable_autoformat
+                        or vim.b[bufnr].disable_autoformat
+                    then
+                        return
+                    end
 
                     -- Disable autoformat for files in a certain path
                     local bufname = vim.api.nvim_buf_get_name(bufnr)
-                    local langtype = vim.bo[bufnr].filetype
                     if
                         bufname:match("/node_modules/")
                         or bufname:match("/.venv/")
                         or bufname:match("/build/")
                         or bufname:match("/dist/")
                         or bufname:match("/.cache/")
-                        or bufname:match("/tambi/")
+                        or bufname:match("/__pycache__/")
                     then
-                        if langtype == "python" then
-                            return
-                        end
+                        return
+                    end
+
+                    local langtype = vim.bo[bufnr].filetype
+                    if langtype == "python" and bufname:match("/tambi/") then
+                        return
                     end
 
                     return { lsp_fallback = true }
                 end,
+
                 formatters_by_ft = {
                     go = { "gofumpt", "goimports", "goimports-reviser" },
                     python = { "black" },
@@ -51,7 +62,7 @@ return {
                     scss = { "prettier" },
                     lua = { "stylua" },
                     sh = { "shfmt" },
-                    cql = { "sql-formatter" },
+                    -- sql = { "sql-formatter" },
                 },
             })
 

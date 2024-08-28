@@ -4,7 +4,7 @@ return {
         config = function()
             require("lint").linters_by_ft = {
                 go = { "golint" },
-                python = { "flake8" },
+                python = { "pyflake", "flake8" },
                 vue = { "eslint", "volar" },
                 typescriptreact = { "eslint" },
                 javascriptreact = { "eslint" },
