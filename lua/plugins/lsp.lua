@@ -39,7 +39,7 @@ return {
                 nmap("K", vim.lsp.buf.hover, "Hover Documentation")
                 nmap("<leader>rr", ":LspRestart<CR>", "Restart LSP servers")
                 -- stylua: ignore
-                vim.keymap.set("i", "<C-i>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
+                vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
 
                 -- start any available linters
                 -- require("lint").try_lint()
