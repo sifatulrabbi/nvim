@@ -17,10 +17,7 @@ return {
                     end
 
                     -- Disable with a global or buffer-local variable
-                    if
-                        vim.g.disable_autoformat
-                        or vim.b[bufnr].disable_autoformat
-                    then
+                    if vim.g.disable_format or vim.b[bufnr].disable_format then
                         return
                     end
 
@@ -38,7 +35,10 @@ return {
                     end
 
                     local langtype = vim.bo[bufnr].filetype
-                    if langtype == "python" and bufname:match("/tambi/") then
+                    if
+                        langtype == "python"
+                        and bufname:match("/tambi%-backend/")
+                    then
                         return
                     end
 
