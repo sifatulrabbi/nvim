@@ -129,6 +129,7 @@ return {
                 eslint = {},
                 rust_analyzer = {},
                 clangd = {},
+                bashls = {},
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

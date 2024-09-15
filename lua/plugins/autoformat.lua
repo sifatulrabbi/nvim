@@ -62,6 +62,7 @@ return {
                     scss = { "prettier" },
                     lua = { "stylua" },
                     sh = { "shfmt" },
+                    bash = { "shfmt" },
                     -- sql = { "sql-formatter" },
                 },
             })
