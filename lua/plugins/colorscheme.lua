@@ -1,15 +1,16 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        "sainnhe/gruvbox-material",
+        lazy = false,
+        priority = 1000,
         config = function()
-            require("catppuccin").setup({
-                show_end_of_buffer = true,
-                no_bold = true,
-                transparent_background = true,
-            })
-
-            -- vim.cmd.colorscheme("catppuccin")
+            vim.g.gruvbox_material_enable_italic = true
+            vim.g.gruvbox_material_background = "hard"
+            vim.g.gruvbox_material_disable_italic_comment = false
+            vim.g.gruvbox_material_better_performance = true
+            vim.cmd.colorscheme("gruvbox-material")
+            -- fix: gruvbox-material not showing visual bg
+            vim.api.nvim_set_hl(0, "Visual", { bg = "#504945" })
         end,
     },
 
@@ -38,7 +39,7 @@ return {
                 },
             })
 
-            vim.cmd.colorscheme("rose-pine")
+            -- vim.cmd.colorscheme("rose-pine")
         end,
     },
 }
