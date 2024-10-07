@@ -60,13 +60,13 @@ return {
         end,
     },
 
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        opts = {
-            max_lines = 7,
-        },
-        config = function()
-            vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
-        end,
-    },
+    -- {
+    --     "nvim-treesitter/nvim-treesitter-context",
+    --     opts = {
+    --         max_lines = 7,
+    --     },
+    --     config = function()
+    --         vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
+    --     end,
+    -- },
 }
