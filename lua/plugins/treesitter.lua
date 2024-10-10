@@ -63,7 +63,7 @@ return {
     -- {
     --     "nvim-treesitter/nvim-treesitter-context",
     --     opts = {
-    --         max_lines = 7,
+    --         max_lines = 4,
     --     },
     --     config = function()
     --         vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
