@@ -37,10 +37,7 @@ return {
                     local langtype = vim.bo[bufnr].filetype
                     if
                         langtype == "python"
-                        and (
-                            bufname:match("/tambi%-backend/")
-                            or bufname:match("/sequesto/")
-                        )
+                        and (bufname:match("/tambi%-backend/")) -- or bufname:match("/sequesto/")
                     then
                         return
                     end
