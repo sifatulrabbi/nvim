@@ -19,9 +19,13 @@ return {
             -- Move to previous/next
             map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
             map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+            map("n", "g,", "<Cmd>BufferPrevious<CR>", opts)
+            map("n", "g.", "<Cmd>BufferNext<CR>", opts)
             -- Re-order to previous/next
             map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
             map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
+            map("n", "g<", "<Cmd>BufferMovePrevious<CR>", opts)
+            map("n", "g>", "<Cmd>BufferMoveNext<CR>", opts)
             -- Goto buffer in position...
             map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
             map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
@@ -33,6 +37,16 @@ return {
             map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
             map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
             map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+            map("n", "g1", "<Cmd>BufferGoto 1<CR>", opts)
+            map("n", "g2", "<Cmd>BufferGoto 2<CR>", opts)
+            map("n", "g3", "<Cmd>BufferGoto 3<CR>", opts)
+            map("n", "g4", "<Cmd>BufferGoto 4<CR>", opts)
+            map("n", "g5", "<Cmd>BufferGoto 5<CR>", opts)
+            map("n", "g6", "<Cmd>BufferGoto 6<CR>", opts)
+            map("n", "g7", "<Cmd>BufferGoto 7<CR>", opts)
+            map("n", "g8", "<Cmd>BufferGoto 8<CR>", opts)
+            map("n", "g9", "<Cmd>BufferGoto 9<CR>", opts)
+            map("n", "g0", "<Cmd>BufferGoto 10<CR>", opts)
             -- Pin/unpin buffer
             map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
             -- Goto pinned/unpinned buffer
