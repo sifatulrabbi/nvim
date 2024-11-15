@@ -87,11 +87,12 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter-context",
-        opts = {
-            max_lines = 4,
-        },
         config = function()
-            vim.cmd([[highlight TreesitterContext guibg=#2E3440]])
+            require("treesitter-context").setup({
+                max_lines = 8,
+                trim_scope = "outer",
+                separator = "_",
+            })
         end,
     },
 }

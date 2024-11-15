@@ -49,11 +49,13 @@ return {
             map("n", "g0", "<Cmd>BufferGoto 10<CR>", opts)
             -- Pin/unpin buffer
             map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
+            map("n", "gp", "<Cmd>BufferPin<CR>", opts)
             -- Goto pinned/unpinned buffer
             --                 :BufferGotoPinned
             --                 :BufferGotoUnpinned
             -- Close buffer
             map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+            map("n", "gC", "<Cmd>BufferClose<CR>", opts)
             -- Wipeout buffer
             --                 :BufferWipeout
             -- Close commands
@@ -63,7 +65,7 @@ return {
             --                 :BufferCloseBuffersLeft
             --                 :BufferCloseBuffersRight
             -- Magic buffer-picking mode
-            -- map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
+            map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
             -- Sort automatically by...
             -- map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
             -- map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
@@ -71,11 +73,13 @@ return {
             -- map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
             -- map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
         end,
-        opts = {
-            animation = false,
-            insert_at_start = false,
-            auto_hide = true,
-        },
+        config = function()
+            require("barbar").setup({
+                animation = false,
+                insert_at_start = false,
+                auto_hide = false,
+            })
+        end,
         version = "^1.0.0",
     },
 

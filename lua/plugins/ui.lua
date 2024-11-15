@@ -5,7 +5,7 @@ return {
         opts = {
             options = {
                 icons_enabled = true,
-                theme = "gruvbox-material",
+                theme = "gruvbox",
                 component_separators = "|",
                 section_separators = "",
                 globalstatus = true,
@@ -173,16 +173,16 @@ return {
 
     {
         "folke/zen-mode.nvim",
-        opts = {
-            window = {
-                width = 120,
-                height = 1,
-                options = {
-                    wrap = true,
-                },
-            },
-        },
         config = function()
+            require("zen-mode").setup({
+                window = {
+                    width = 120,
+                    height = 1,
+                    options = {
+                        wrap = true,
+                    },
+                },
+            })
             vim.api.nvim_set_keymap(
                 "n",
                 "<leader>z",
