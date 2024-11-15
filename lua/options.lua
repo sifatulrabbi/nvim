@@ -34,8 +34,8 @@ vim.opt.updatetime = 250
 
 vim.opt.colorcolumn = "80"
 
-vim.o.spell = true
-vim.o.spelllang = "en_us"
+-- vim.o.spell = true
+-- vim.o.spelllang = "en_us"
 
 vim.wo.conceallevel = 0
 
