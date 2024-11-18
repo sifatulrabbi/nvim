@@ -21,14 +21,11 @@ return {
                 dockerfile = { "hadolint" },
             }
 
-            local function run_linters()
-                lint.try_lint()
-                lint.try_lint("cspell")
-            end
-
             local timer = assert(vim.uv.new_timer())
             local DEBOUNCE_MS = 500
             local aug = vim.api.nvim_create_augroup("Lint", { clear = true })
+            local spell_auggrp =
+                vim.api.nvim_create_augroup("LintSpelling", { clear = true })
 
             vim.api.nvim_create_autocmd(
                 { "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" },
@@ -46,7 +43,32 @@ return {
                                     and vim.bo[bufnr].modifiable
                                 then
                                     vim.api.nvim_buf_call(bufnr, function()
-                                        run_linters()
+                                        lint.try_lint()
+                                    end)
+                                end
+                            end)
+                        )
+                    end,
+                }
+            )
+
+            vim.api.nvim_create_autocmd(
+                { "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" },
+                {
+                    group = spell_auggrp,
+                    callback = function()
+                        local bufnr = vim.api.nvim_get_current_buf()
+                        timer:stop()
+                        timer:start(
+                            DEBOUNCE_MS / 2,
+                            0,
+                            vim.schedule_wrap(function()
+                                if
+                                    vim.api.nvim_buf_is_valid(bufnr)
+                                    and vim.bo[bufnr].modifiable
+                                then
+                                    vim.api.nvim_buf_call(bufnr, function()
+                                        lint.try_lint("cspell")
                                     end)
                                 end
                             end)
