@@ -37,7 +37,10 @@ return {
                     local langtype = vim.bo[bufnr].filetype
                     if
                         langtype == "python"
-                        and (bufname:match("/tambi%-backend/")) -- or bufname:match("/sequesto/")
+                        and (
+                            bufname:match("/tambi%-backend/")
+                            or bufname:match("/language%-predictor/")
+                        )
                     then
                         return
                     end
@@ -63,6 +66,7 @@ return {
                     lua = { "stylua" },
                     sh = { "shfmt" },
                     bash = { "shfmt" },
+                    c = { "clang-format" },
                     -- sql = { "sql-formatter" },
                 },
             })
@@ -80,6 +84,11 @@ return {
                     "--quote-style",
                     "ForceDouble",
                     "-",
+                },
+            }
+            conform.formatters["clang-format"] = {
+                args = {
+                    "--style={BasedOnStyle: llvm, IndentWidth: 4, TabWidth: 4, UseTab: Always}",
                 },
             }
 
