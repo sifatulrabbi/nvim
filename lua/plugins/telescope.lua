@@ -17,12 +17,7 @@ return {
             -- See `:help telescope` and `:help telescope.setup()`
             require("telescope").setup({
                 defaults = {
-                    layout_config = {
-                        horizontal = {
-                            preview_width = 0.5,
-                            results_width = 0.5,
-                        },
-                    },
+                    layout_config = {},
                 },
                 pickers = {
                     find_files = {

@@ -39,7 +39,7 @@ return {
                 "icon",
                 "permissions",
                 "size",
-                -- "mtime",
+                "mtime",
             },
             lsp_file_methods = {
                 timeout_ms = 1000,
@@ -71,7 +71,7 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {},
-        configg = function()
+        config = function()
             local highlight = {
                 "RainbowRed",
                 "RainbowYellow",

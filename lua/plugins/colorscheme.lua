@@ -33,22 +33,6 @@ return {
     },
 
     -- {
-    --     "sainnhe/gruvbox-material",
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.g.gruvbox_material_enable_italic = 1
-    --         vim.g.gruvbox_material_background = "soft"
-    --         vim.g.gruvbox_material_disable_italic_comment = 1
-    --         vim.g.gruvbox_material_better_performance = 1
-    --
-    --         vim.cmd.colorscheme("gruvbox-material")
-    --         -- fix: gruvbox-material not showing visual bg
-    --         -- vim.api.nvim_set_hl(0, "Visual", { bg = "#504945" })
-    --     end,
-    -- },
-
-    -- {
     --     "rose-pine/neovim",
     --     as = "rose-pine",
     --     opts = {},
