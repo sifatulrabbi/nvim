@@ -88,36 +88,81 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
-
     {
-        "ThePrimeagen/harpoon",
-        lazy = false,
-        branch = "harpoon2",
-        requires = { { "nvim-lua/plenary.nvim" } },
-        opts = {},
-        config = function()
-            local harpoon = require("harpoon")
-            harpoon:setup({
-                settings = {
-                    save_on_toggle = true,
-                    sync_on_ui_close = true,
+        "folke/trouble.nvim",
+        cmd = { "Trouble" },
+        opts = {
+            modes = {
+                lsp = {
+                    win = { position = "right" },
                 },
-            })
-
-            -- stylua: ignore start
-            vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add to harpoon list" })
-            vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-            -- vim.keymap.set("n", "<A-1>", function() harpoon:list():select(1) end)
-            -- vim.keymap.set("n", "<A-2>", function() harpoon:list():select(2) end)
-            -- vim.keymap.set("n", "<A-3>", function() harpoon:list():select(3) end)
-            -- vim.keymap.set("n", "<A-4>", function() harpoon:list():select(4) end)
-            -- vim.keymap.set("n", "<A-5>", function() harpoon:list():select(5) end)
-            -- vim.keymap.set("n", "<A-6>", function() harpoon:list():select(6) end)
-            -- vim.keymap.set("n", "<A-7>", function() harpoon:list():select(7) end)
-            -- vim.keymap.set("n", "<A-8>", function() harpoon:list():select(8) end)
-            -- vim.keymap.set("n", "<A-9>", function() harpoon:list():select(9) end)
-            -- vim.keymap.set("n", "<A-0>", function() harpoon:list():select(0) end)
-        end,
+            },
+        },
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cS",
+                "<cmd>Trouble lsp toggle<cr>",
+                desc = "LSP references/definitions/... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+            {
+                "[q",
+                function()
+                    if require("trouble").is_open() then
+                        require("trouble").prev({
+                            skip_groups = true,
+                            jump = true,
+                        })
+                    else
+                        local ok, err = pcall(vim.cmd.cprev)
+                        if not ok then
+                            vim.notify(err, vim.log.levels.ERROR)
+                        end
+                    end
+                end,
+                desc = "Previous Trouble/Quickfix Item",
+            },
+            {
+                "]q",
+                function()
+                    if require("trouble").is_open() then
+                        require("trouble").next({
+                            skip_groups = true,
+                            jump = true,
+                        })
+                    else
+                        local ok, err = pcall(vim.cmd.cnext)
+                        if not ok then
+                            vim.notify(err, vim.log.levels.ERROR)
+                        end
+                    end
+                end,
+                desc = "Next Trouble/Quickfix Item",
+            },
+        },
     },
 }
