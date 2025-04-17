@@ -42,6 +42,7 @@ return {
 
             -- Enable telescope fzf native, if installed
             pcall(require("telescope").load_extension, "fzf")
+            pcall(require("telescope").load_extension, "lazygit")
 
             local ts_builtin = require("telescope.builtin")
             -- stylua: ignore start
