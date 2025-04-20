@@ -1,3 +1,20 @@
+local function get_fd_cmd()
+    -- In Neovim, vim.fn.executable returns 1 if the command exists
+    if vim.fn.executable("fd") == 1 then
+        return "fd"
+    end
+    if vim.fn.executable("fdfind") == 1 then
+        return "fdfind"
+    end
+
+    vim.notify(
+        "Neither 'fd' nor 'fdfind' was found in your PATH",
+        vim.log.levels.ERROR
+    )
+
+    return "fd"
+end
+
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -22,7 +39,7 @@ return {
                 pickers = {
                     find_files = {
                         find_command = {
-                            "fd",
+                            get_fd_cmd(),
                             "-H",
                             "-t",
                             "f",
@@ -64,7 +81,8 @@ return {
             vim.keymap.set("n", "gi", ts_builtin.lsp_implementations, { desc = "LSP: Goto [I]mplementation" })
             vim.keymap.set("n", "gD", ts_builtin.lsp_type_definitions, { desc = "LSP: Type [D]efinition" })
             vim.keymap.set("n", "<leader>fs", ts_builtin.lsp_document_symbols, { desc = "LSP: Document [S]ymbols" })
-            vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols, { desc = "LSP: Workspace [S]ymbols" })
+            vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols,
+                { desc = "LSP: Workspace [S]ymbols" })
         end,
     },
 }
