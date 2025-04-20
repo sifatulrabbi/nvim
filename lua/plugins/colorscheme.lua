@@ -22,41 +22,13 @@ return {
                 invert_tabline = false,
                 invert_intend_guides = false,
                 inverse = true,
-                contrast = "soft",
+                contrast = "hard",
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
-                transparent_mode = false,
+                transparent_mode = true,
             })
             vim.cmd.colorscheme("gruvbox")
         end,
     },
-
-    -- {
-    --     "rose-pine/neovim",
-    --     as = "rose-pine",
-    --     opts = {},
-    --     config = function()
-    --         require("rose-pine").setup({
-    --             variant = "dawn",
-    --             -- dim_nc_background = true,
-    --             disable_background = true,
-    --             disable_float_background = true,
-    --
-    --             enable = {
-    --                 terminal = true,
-    --                 legacy_highlights = true,
-    --                 migrations = true,
-    --             },
-    --
-    --             styles = {
-    --                 bold = true,
-    --                 italic = true,
-    --                 transparency = true,
-    --             },
-    --         })
-    --
-    --         vim.cmd.colorscheme("rose-pine")
-    --     end,
-    -- },
 }
