@@ -115,6 +115,7 @@ return {
                 rust_analyzer = {},
                 clangd = {},
                 bashls = {},
+                csharp_ls = { "csharp" },
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
