@@ -73,6 +73,9 @@ return {
                         },
                     },
                 },
+                ruff = {
+                    logLevel = "debug",
+                },
                 ts_ls = {
                     filetypes = {
                         "javascript",
