@@ -4,7 +4,6 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "folke/neodev.nvim",
             { "j-hui/fidget.nvim", opts = {} },
         },
         config = function()
@@ -18,7 +17,7 @@ return {
                 },
             })
             require("mason-lspconfig").setup({ automatic_enable = false })
-            -- require("neodev").setup({ lspconfig = false })
+
             local on_attach = function(_, bufnr)
                 local nmap = function(keys, func, desc)
                     if desc then
