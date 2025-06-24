@@ -4,3 +4,4 @@
 .tmp
 spell
 lazy-lock.json
+*.ignore.*

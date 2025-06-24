@@ -17,9 +17,8 @@ return {
                     },
                 },
             })
-            require("mason-lspconfig").setup()
-            require("neodev").setup()
-
+            require("mason-lspconfig").setup({ automatic_enable = false })
+            -- require("neodev").setup({ lspconfig = false })
             local on_attach = function(_, bufnr)
                 local nmap = function(keys, func, desc)
                     if desc then
@@ -42,7 +41,7 @@ return {
                 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
 
                 -- start any available linters
-                -- require("lint").try_lint()
+                require("lint").try_lint()
             end
 
             -- Enable the following language servers
@@ -94,9 +93,6 @@ return {
                 html = {
                     filetypes = { "html", "twig", "hbs", "vue" },
                 },
-                volar = {
-                    filetypes = { "vue" },
-                },
                 cssls = {
                     filetypes = { "vue", "css", "scss" },
                 },
@@ -118,9 +114,11 @@ return {
                 rust_analyzer = {},
                 clangd = {},
                 bashls = {
-                    filetypes = { "bash", "shell", "zsh", "fish" },
+                    filetypes = { "bash", "shell", "zsh", "fish", "dotenv" },
                 },
-                csharp_ls = { "csharp" },
+                csharp_ls = {
+                    filetypes = { "csharp", "cs" },
+                },
             }
 
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -132,21 +130,30 @@ return {
             local mason_lspconfig = require("mason-lspconfig")
 
             mason_lspconfig.setup({
+                automatic_enable = false,
                 ensure_installed = vim.tbl_keys(servers),
             })
 
-            mason_lspconfig.setup_handlers({
-                function(server_name)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        settings = servers[server_name],
-                        filetypes = (servers[server_name] or {}).filetypes,
-                    })
-                end,
-            })
+            -- Setting up each of the servers with configs
+            local lspconfig = require("lspconfig")
+
+            for server_name, config in pairs(servers) do
+                config.capabilities = capabilities
+                config.on_attach = on_attach
+                lspconfig[server_name].setup(config)
+            end
         end,
     },
 
-    -- { "jose-elias-alvarez/typescript.nvim", opts = {} },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
 }
