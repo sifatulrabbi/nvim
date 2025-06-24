@@ -117,7 +117,9 @@ return {
                 eslint = {},
                 rust_analyzer = {},
                 clangd = {},
-                bashls = {},
+                bashls = {
+                    filetypes = { "bash", "shell", "zsh", "fish" },
+                },
                 csharp_ls = { "csharp" },
             }
 
