@@ -27,55 +27,58 @@ return {
             local spell_auggrp =
                 vim.api.nvim_create_augroup("LintSpelling", { clear = true })
 
-            vim.api.nvim_create_autocmd(
-                { "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" },
-                {
-                    group = aug,
-                    callback = function()
-                        local bufnr = vim.api.nvim_get_current_buf()
-                        timer:stop()
-                        timer:start(
-                            DEBOUNCE_MS,
-                            0,
-                            vim.schedule_wrap(function()
-                                if
-                                    vim.api.nvim_buf_is_valid(bufnr)
-                                    and vim.bo[bufnr].modifiable
-                                then
-                                    vim.api.nvim_buf_call(bufnr, function()
-                                        lint.try_lint()
-                                    end)
-                                end
-                            end)
-                        )
-                    end,
-                }
-            )
+            vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+                group = aug,
+                callback = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+                    timer:stop()
+                    timer:start(
+                        DEBOUNCE_MS,
+                        0,
+                        vim.schedule_wrap(function()
+                            if
+                                vim.api.nvim_buf_is_valid(bufnr)
+                                and vim.bo[bufnr].modifiable
+                            then
+                                vim.api.nvim_buf_call(bufnr, function()
+                                    local ok, _ = pcall(lint.try_lint)
+                                    if not ok then
+                                        vim.notify(
+                                            "Linting failed",
+                                            vim.log.levels.WARN
+                                        )
+                                    end
+                                end)
+                            end
+                        end)
+                    )
+                end,
+            })
 
-            vim.api.nvim_create_autocmd(
-                { "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" },
-                {
-                    group = spell_auggrp,
-                    callback = function()
-                        local bufnr = vim.api.nvim_get_current_buf()
-                        timer:stop()
-                        timer:start(
-                            DEBOUNCE_MS / 2,
-                            0,
-                            vim.schedule_wrap(function()
-                                if
-                                    vim.api.nvim_buf_is_valid(bufnr)
-                                    and vim.bo[bufnr].modifiable
-                                then
-                                    vim.api.nvim_buf_call(bufnr, function()
-                                        lint.try_lint("cspell")
-                                    end)
-                                end
-                            end)
-                        )
-                    end,
-                }
-            )
+            vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+                group = spell_auggrp,
+                callback = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+                    timer:stop()
+                    timer:start(
+                        DEBOUNCE_MS / 2,
+                        0,
+                        vim.schedule_wrap(function()
+                            if
+                                vim.api.nvim_buf_is_valid(bufnr)
+                                and vim.bo[bufnr].modifiable
+                            then
+                                vim.api.nvim_buf_call(bufnr, function()
+                                    local ok, _ = pcall(lint.try_lint, "cspell")
+                                    if not ok then
+                                        -- Silently fail for spell check
+                                    end
+                                end)
+                            end
+                        end)
+                    )
+                end,
+            })
         end,
     },
 }

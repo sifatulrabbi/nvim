@@ -12,11 +12,10 @@ return {
                     icons = {
                         package_installed = "✓",
                         package_pending = "➜",
-                        package_uninstalled = "✗",
+                        package_uninstalled = "x",
                     },
                 },
             })
-            require("mason-lspconfig").setup({ automatic_enable = false })
 
             local on_attach = function(_, bufnr)
                 local nmap = function(keys, func, desc)
@@ -39,8 +38,13 @@ return {
                 -- stylua: ignore
                 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
 
-                -- start any available linters
-                require("lint").try_lint()
+                -- start any available linters after a small delay to avoid conflicts
+                vim.defer_fn(function()
+                    local ok, lint = pcall(require, "lint")
+                    if ok then
+                        lint.try_lint()
+                    end
+                end, 100)
             end
 
             -- Enable the following language servers
@@ -127,19 +131,37 @@ return {
 
             -- Ensure the servers above are installed
             local mason_lspconfig = require("mason-lspconfig")
-
             mason_lspconfig.setup({
                 automatic_enable = false,
                 ensure_installed = vim.tbl_keys(servers),
+                automatic_installation = true,
             })
 
             -- Setting up each of the servers with configs
             local lspconfig = require("lspconfig")
 
+            -- Setup each server individually
             for server_name, config in pairs(servers) do
                 config.capabilities = capabilities
                 config.on_attach = on_attach
-                lspconfig[server_name].setup(config)
+
+                if lspconfig[server_name] then
+                    local ok, err = pcall(lspconfig[server_name].setup, config)
+                    if not ok then
+                        vim.notify(
+                            "Failed to setup LSP server: "
+                                .. server_name
+                                .. " - "
+                                .. tostring(err),
+                            vim.log.levels.ERROR
+                        )
+                    end
+                else
+                    vim.notify(
+                        "LSP server not found: " .. server_name,
+                        vim.log.levels.WARN
+                    )
+                end
             end
         end,
     },

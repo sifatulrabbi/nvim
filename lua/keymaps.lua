@@ -16,14 +16,14 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move HL line up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move HL line up" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "" })
 
-vim.keymap.set("n", "<leader>l", function() vim.cmd("Lazy") end, { desc = "Open Lazy menu" })
-
 -- system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Add to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p", { desc = "Paste from clipboard" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open [l]azy" })
+vim.keymap.set("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Open [l]azy" })
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open [m]ason" })
+vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", { desc = "LSP [i]nfo" })
+
 vim.keymap.set("n", "<C-w>t", "<cmd>tabnew<CR>", { desc = "Create new empty tab" })
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save current buffer" })
 
