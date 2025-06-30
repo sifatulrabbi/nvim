@@ -97,7 +97,12 @@ return {
                     filetypes = { "html", "twig", "hbs", "vue" },
                 },
                 cssls = {
-                    filetypes = { "vue", "css", "scss" },
+                    filetypes = {
+                        "vue",
+                        "css",
+                        "scss",
+                        "html",
+                    },
                 },
                 lua_ls = {
                     Lua = {
@@ -113,14 +118,45 @@ return {
                 },
                 dockerls = {},
                 docker_compose_language_service = {},
-                eslint = {},
-                rust_analyzer = {},
+                eslint = {
+                    filetypes = {
+                        "html",
+                        "css",
+                        "scss",
+                        "vue",
+                        "javascript.tsx",
+                        "typescript.tsx",
+                        "typescriptreact",
+                        "javascriptreact",
+                    },
+                },
+                rust_analyzer = {
+                    filetypes = { "rust", "cargo" },
+                },
                 clangd = {},
                 bashls = {
                     filetypes = { "bash", "shell", "zsh", "fish", "dotenv" },
                 },
                 csharp_ls = {
                     filetypes = { "csharp", "cs" },
+                },
+                yamlls = {
+                    filetypes = { "yaml", "yml" },
+                },
+                tailwindcss = {
+                    filetypes = {
+                        "html",
+                        "css",
+                        "scss",
+                        "vue",
+                        "javascript.tsx",
+                        "typescript.tsx",
+                        "typescriptreact",
+                        "javascriptreact",
+                    },
+                },
+                vue_ls = {
+                    filetypes = { "vue" },
                 },
             }
 
