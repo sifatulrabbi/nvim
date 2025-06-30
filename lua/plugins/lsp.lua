@@ -155,7 +155,7 @@ return {
                         "javascriptreact",
                     },
                 },
-                vue_ls = {
+                vuels = {
                     filetypes = { "vue" },
                 },
             }
