@@ -68,6 +68,7 @@ return {
                     bash = { "shfmt", "beautysh" },
                     zsh = { "shfmt", "beautysh" },
                     c = { "clang-format" },
+                    csharp = { "csharpier" },
                     -- sql = { "sql-formatter" },
                 },
             })

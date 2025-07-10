@@ -6,8 +6,8 @@ return {
             local lint = require("lint")
 
             lint.linters_by_ft = {
-                go = { "golint" },
-                python = { "pyflake", "flake8" },
+                go = { "golangcilint" },
+                python = { "flake8" },
                 vue = { "eslint", "volar" },
                 typescriptreact = { "eslint" },
                 javascriptreact = { "eslint" },

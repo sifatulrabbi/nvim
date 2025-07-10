@@ -60,7 +60,6 @@ return {
                             },
                             staticcheck = true,
                             gofumpt = true,
-                            goimports = true,
                         },
                     },
                 },
@@ -121,6 +120,10 @@ return {
                 },
                 csharp_ls = {
                     filetypes = { "csharp", "cs" },
+                    root_dir = require("lspconfig.util").root_pattern(
+                        "*.sln",
+                        "*.csproj"
+                    ),
                 },
             }
 
