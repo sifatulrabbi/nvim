@@ -136,13 +136,13 @@ return {
                 bashls = {
                     filetypes = { "bash", "shell", "zsh", "fish", "dotenv" },
                 },
-                csharp_ls = {
-                    filetypes = { "csharp", "cs" },
-                    root_dir = require("lspconfig.util").root_pattern(
-                        "*.sln",
-                        "*.csproj"
-                    ),
-                },
+                -- csharp_ls = {
+                --     filetypes = { "csharp", "cs" },
+                --     root_dir = require("lspconfig.util").root_pattern(
+                --         "*.sln",
+                --         "*.csproj"
+                --     ),
+                -- },
                 yamlls = {
                     filetypes = { "yaml", "yml" },
                 },
