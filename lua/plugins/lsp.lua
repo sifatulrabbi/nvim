@@ -136,13 +136,29 @@ return {
                 bashls = {
                     filetypes = { "bash", "shell", "zsh", "fish", "dotenv" },
                 },
-                -- csharp_ls = {
-                --     filetypes = { "csharp", "cs" },
-                --     root_dir = require("lspconfig.util").root_pattern(
-                --         "*.sln",
-                --         "*.csproj"
-                --     ),
-                -- },
+                -- C# LSP Server - Use OmniSharp for .NET development
+                omnisharp = {
+                    filetypes = { "cs", "csharp" },
+                    root_dir = require("lspconfig.util").root_pattern(
+                        "*.sln",
+                        "*.csproj",
+                        "omnisharp.json",
+                        "function.json",
+                        ".git"
+                    ),
+                    settings = {
+                        FormattingOptions = {
+                            OrganizeImports = true,
+                        },
+                        RoslynExtensionsOptions = {
+                            EnableAnalyzersSupport = true,
+                            EnableImportCompletion = true,
+                        },
+                    },
+                    init_options = {
+                        autoStart = true,
+                    },
+                },
                 yamlls = {
                     filetypes = { "yaml", "yml" },
                 },
