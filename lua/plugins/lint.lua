@@ -9,10 +9,10 @@ return {
                 go = { "golangcilint" },
                 python = { "flake8" },
                 vue = { "volar" },
-                -- typescriptreact = { "eslint" },
-                -- javascriptreact = { "eslint" },
-                -- javascript = { "eslint" },
-                -- typescript = { "eslint" },
+                typescriptreact = { "eslint" },
+                javascriptreact = { "eslint" },
+                javascript = { "eslint" },
+                typescript = { "eslint" },
                 html = { "htmlhint" },
                 css = { "stylelint" },
                 scss = { "stylelint" },
@@ -41,6 +41,10 @@ return {
                                 and vim.bo[bufnr].modifiable
                             then
                                 vim.api.nvim_buf_call(bufnr, function()
+                                    vim.diagnostic.reset(
+                                        lint.get_namespace(),
+                                        bufnr
+                                    )
                                     local ok, _ = pcall(lint.try_lint)
                                     if not ok then
                                         vim.notify(
