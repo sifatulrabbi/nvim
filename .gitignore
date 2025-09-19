@@ -1,7 +1,8 @@
-.DS_Store
-.env
-._*
-.tmp
-spell
-lazy-lock.json
-*.ignore.*
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data

@@ -1,2 +1,0 @@
-vim.bo.filetype = "bash"
-
