@@ -7,12 +7,12 @@ return {
 
             lint.linters_by_ft = {
                 go = { "golangcilint" },
-                python = { "flake8" },
+                -- python = { "flake8" },
                 vue = { "volar" },
-                typescriptreact = { "eslint" },
-                javascriptreact = { "eslint" },
-                javascript = { "eslint" },
-                typescript = { "eslint" },
+                -- typescriptreact = { "eslint_d" },
+                -- javascriptreact = { "eslint_d" },
+                -- javascript = { "eslint_d" },
+                -- typescript = { "eslint_d" },
                 html = { "htmlhint" },
                 css = { "stylelint" },
                 scss = { "stylelint" },

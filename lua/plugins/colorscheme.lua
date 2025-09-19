@@ -4,6 +4,10 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
+            -- tell Neovim to use the light background
+            vim.o.background = "dark"
+            -- vim.o.background = "light"
+
             require("gruvbox").setup({
                 terminal_colors = true,
                 undercurl = true,
@@ -22,13 +26,17 @@ return {
                 invert_tabline = false,
                 invert_intend_guides = false,
                 inverse = true,
-                contrast = "hard",
+                contrast = "medium",
+                -- flavour = "light",
+                flavour = "dark",
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
                 transparent_mode = false,
             })
-            vim.cmd.colorscheme("gruvbox")
+
+            -- apply the colorscheme
+            vim.cmd("colorscheme gruvbox")
         end,
     },
 }

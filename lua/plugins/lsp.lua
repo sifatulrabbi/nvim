@@ -74,9 +74,9 @@ return {
                         },
                     },
                 },
-                ruff = {
-                    logLevel = "debug",
-                },
+                -- ruff = {
+                --     logLevel = "debug",
+                -- },
                 ts_ls = {
                     filetypes = {
                         "javascript",
@@ -117,18 +117,18 @@ return {
                 },
                 dockerls = {},
                 docker_compose_language_service = {},
-                eslint = {
-                    filetypes = {
-                        "html",
-                        "css",
-                        "scss",
-                        "vue",
-                        "javascript.tsx",
-                        "typescript.tsx",
-                        "typescriptreact",
-                        "javascriptreact",
-                    },
-                },
+                -- eslint = {
+                --     filetypes = {
+                --         "html",
+                --         "css",
+                --         "scss",
+                --         "vue",
+                --         "javascript.tsx",
+                --         "typescript.tsx",
+                --         "typescriptreact",
+                --         "javascriptreact",
+                --     },
+                -- },
                 rust_analyzer = {
                     filetypes = { "rust", "cargo" },
                 },
