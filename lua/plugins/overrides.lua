@@ -66,4 +66,42 @@ return {
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+
+  {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      servers = {
+        pyright = {},
+        ts_ls = {},
+        gopls = {},
+      },
+    },
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+        "gopls",
+        "pyright",
+        "ts_ls",
+        "vtsls",
+        "clangd",
+        "cmake",
+        "docker_compose_language_service",
+        "docker_language_server",
+        "eslint",
+        "lua_ls",
+        "nginx_language_server",
+        "tailwindcss",
+        "yamlls",
+      },
+    },
+  },
 }
