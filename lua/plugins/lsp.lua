@@ -230,71 +230,14 @@ return {
             })
 
             -- Setup each server individually
-            -- Helper function to check if a file exists in project (recursive)
-            local function has_file(patterns)
-                local list = type(patterns) == "table" and patterns or { patterns }
-                local cwd = uv.cwd() or vim.fn.getcwd()
-
-                for _, pattern in ipairs(list) do
-                    local glob_pattern = pattern
-                    if not pattern:find("/") then
-                        glob_pattern = "**/" .. pattern
-                    end
-
-                    local matches = vim.fn.globpath(cwd, glob_pattern, false, true)
-                    if type(matches) == "table" and #matches > 0 then
-                        return true
-                    end
-                    if type(matches) == "string" and matches ~= "" then
-                        return true
-                    end
-                end
-
-                return false
-            end
-
-            -- Helper function for conditional server loading
-            local function should_load_server(server_name)
-                local conditions = {
-                    gopls = function() return has_file({ "go.mod", "go.work", "*.go" }) end,
-                    pyright = function()
-                        return has_file({ "*.py", "requirements.txt", "pyproject.toml", "setup.cfg" })
-                    end,
-                    ruff = function()
-                        return has_file("*.py") or has_file({ "ruff.toml", "pyproject.toml", "setup.cfg" })
-                    end,
-                    ts_ls = function()
-                        return has_file({ "package.json", "tsconfig.json", "*.ts", "*.tsx", "*.js", "*.jsx" })
-                    end,
-                    volar = function() return has_file("*.vue") end,
-                    rust_analyzer = function() return has_file({ "Cargo.toml", "*.rs" }) end,
-                    omnisharp = function() return has_file({ "*.cs", "*.csproj", "global.json" }) end,
-                    tailwindcss = function()
-                        return has_file("tailwind.config.*")
-                    end,
-                }
-
-                local condition = conditions[server_name]
-                return condition == nil or condition()
-            end
-
-            vim.lsp.config('*', {
-                on_attach = on_attach,
-                capabilities = capabilities,
+            mason_lspconfig.setup_handlers({
+                function(server_name)
+                    local config = servers[server_name] or {}
+                    config.on_attach = on_attach
+                    config.capabilities = capabilities
+                    require("lspconfig")[server_name].setup(config)
+                end,
             })
-
-            local enabled_servers = {}
-
-            for server_name, config in pairs(servers) do
-                if should_load_server(server_name) then
-                    vim.lsp.config(server_name, config)
-                    enabled_servers[#enabled_servers + 1] = server_name
-                end
-            end
-
-            if #enabled_servers > 0 then
-                vim.lsp.enable(enabled_servers)
-            end
         end,
     },
 
