@@ -5,3 +5,4 @@
 spell
 lazy-lock.json
 *.ignore.*
+.nvimlog

@@ -17,7 +17,7 @@ return {
                 },
             })
 
-            local on_attach = function(_, bufnr)
+            local on_attach = function(client, bufnr)
                 local nmap = function(keys, func, desc)
                     if desc then
                         desc = "LSP: " .. desc
@@ -37,6 +37,14 @@ return {
                 nmap("<leader>rr", ":LspRestart<CR>", "Restart LSP servers")
                 -- stylua: ignore
                 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: " .. "Signature Documentation" })
+
+                -- Enable inlay hints if supported
+                if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                    nmap("<leader>ih", function()
+                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+                    end, "Toggle [i]nlay [h]ints")
+                end
 
                 -- start any available linters after a small delay to avoid conflicts
                 vim.defer_fn(function()
@@ -70,26 +78,43 @@ return {
                                 autoSearchPaths = true,
                                 diagnosticMode = "workspace",
                                 useLibraryCodeForTypes = true,
+                                typeCheckingMode = "basic",
+                                autoImportCompletions = true,
+                                indexing = true,
                             },
                         },
                     },
                 },
-                -- ruff = {
-                --     logLevel = "debug",
-                -- },
                 ts_ls = {
                     filetypes = {
                         "javascript",
                         "typescript",
-                        "javascript.tsx",
-                        "typescript.tsx",
-                        "vue",
-                        "jsx",
-                        "html",
-                        "twig",
-                        "hbs",
                         "typescriptreact",
                         "javascriptreact",
+                    },
+                    settings = {
+                        typescript = {
+                            inlayHints = {
+                                includeInlayParameterNameHints = "all",
+                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                includeInlayFunctionParameterTypeHints = true,
+                                includeInlayVariableTypeHints = true,
+                                includeInlayPropertyDeclarationTypeHints = true,
+                                includeInlayFunctionLikeReturnTypeHints = true,
+                                includeInlayEnumMemberValueHints = true,
+                            },
+                        },
+                        javascript = {
+                            inlayHints = {
+                                includeInlayParameterNameHints = "all",
+                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                includeInlayFunctionParameterTypeHints = true,
+                                includeInlayVariableTypeHints = true,
+                                includeInlayPropertyDeclarationTypeHints = true,
+                                includeInlayFunctionLikeReturnTypeHints = true,
+                                includeInlayEnumMemberValueHints = true,
+                            },
+                        },
                     },
                 },
                 html = {
@@ -104,9 +129,11 @@ return {
                     },
                 },
                 lua_ls = {
-                    Lua = {
-                        workspace = { checkThirdParty = false },
-                        telemetry = { enable = false },
+                    settings = {
+                        Lua = {
+                            workspace = { checkThirdParty = false },
+                            telemetry = { enable = false },
+                        },
                     },
                 },
                 jsonls = {
@@ -117,18 +144,6 @@ return {
                 },
                 dockerls = {},
                 docker_compose_language_service = {},
-                -- eslint = {
-                --     filetypes = {
-                --         "html",
-                --         "css",
-                --         "scss",
-                --         "vue",
-                --         "javascript.tsx",
-                --         "typescript.tsx",
-                --         "typescriptreact",
-                --         "javascriptreact",
-                --     },
-                -- },
                 rust_analyzer = {
                     filetypes = { "rust", "cargo" },
                 },
@@ -160,55 +175,125 @@ return {
                         "css",
                         "scss",
                         "vue",
-                        "javascript.tsx",
-                        "typescript.tsx",
                         "typescriptreact",
                         "javascriptreact",
                     },
                 },
-                vuels = {
-                    filetypes = { "vue" },
+                ruff = {
+                    filetypes = { "python" },
+                    init_options = {
+                        settings = {
+                            args = {
+                                "--ignore=E501",
+                            },
+                        },
+                    },
+                },
+                marksman = {
+                    filetypes = { "markdown" },
+                    settings = {
+                        marksman = {
+                            completion = {
+                                wiki = {
+                                    style = "title",
+                                },
+                            },
+                        },
+                    },
                 },
             }
 
+            local uv = vim.uv or vim.loop
+
             -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities =
-                require("cmp_nvim_lsp").default_capabilities(capabilities)
+            capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+            -- Enable additional modern LSP capabilities
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            capabilities.textDocument.completion.completionItem.resolveSupport = {
+                properties = { "documentation", "detail", "additionalTextEdits" }
+            }
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true
+            }
+            if capabilities.textDocument.semanticTokens then
+                capabilities.textDocument.semanticTokens.multilineTokenSupport = true
+            end
 
             -- Ensure the servers above are installed
             local mason_lspconfig = require("mason-lspconfig")
             mason_lspconfig.setup({
-                automatic_enable = false,
                 ensure_installed = vim.tbl_keys(servers),
                 automatic_installation = true,
             })
 
-            -- Setting up each of the servers with configs
-            local lspconfig = require("lspconfig")
-
             -- Setup each server individually
-            for server_name, config in pairs(servers) do
-                config.capabilities = capabilities
-                config.on_attach = on_attach
+            -- Helper function to check if a file exists in project (recursive)
+            local function has_file(patterns)
+                local list = type(patterns) == "table" and patterns or { patterns }
+                local cwd = uv.cwd() or vim.fn.getcwd()
 
-                if lspconfig[server_name] then
-                    local ok, err = pcall(lspconfig[server_name].setup, config)
-                    if not ok then
-                        vim.notify(
-                            "Failed to setup LSP server: "
-                                .. server_name
-                                .. " - "
-                                .. tostring(err),
-                            vim.log.levels.ERROR
-                        )
+                for _, pattern in ipairs(list) do
+                    local glob_pattern = pattern
+                    if not pattern:find("/") then
+                        glob_pattern = "**/" .. pattern
                     end
-                else
-                    vim.notify(
-                        "LSP server not found: " .. server_name,
-                        vim.log.levels.WARN
-                    )
+
+                    local matches = vim.fn.globpath(cwd, glob_pattern, false, true)
+                    if type(matches) == "table" and #matches > 0 then
+                        return true
+                    end
+                    if type(matches) == "string" and matches ~= "" then
+                        return true
+                    end
                 end
+
+                return false
+            end
+
+            -- Helper function for conditional server loading
+            local function should_load_server(server_name)
+                local conditions = {
+                    gopls = function() return has_file({ "go.mod", "go.work", "*.go" }) end,
+                    pyright = function()
+                        return has_file({ "*.py", "requirements.txt", "pyproject.toml", "setup.cfg" })
+                    end,
+                    ruff = function()
+                        return has_file("*.py") or has_file({ "ruff.toml", "pyproject.toml", "setup.cfg" })
+                    end,
+                    ts_ls = function()
+                        return has_file({ "package.json", "tsconfig.json", "*.ts", "*.tsx", "*.js", "*.jsx" })
+                    end,
+                    volar = function() return has_file("*.vue") end,
+                    rust_analyzer = function() return has_file({ "Cargo.toml", "*.rs" }) end,
+                    omnisharp = function() return has_file({ "*.cs", "*.csproj", "global.json" }) end,
+                    tailwindcss = function()
+                        return has_file("tailwind.config.*")
+                    end,
+                }
+
+                local condition = conditions[server_name]
+                return condition == nil or condition()
+            end
+
+            vim.lsp.config('*', {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            })
+
+            local enabled_servers = {}
+
+            for server_name, config in pairs(servers) do
+                if should_load_server(server_name) then
+                    vim.lsp.config(server_name, config)
+                    enabled_servers[#enabled_servers + 1] = server_name
+                end
+            end
+
+            if #enabled_servers > 0 then
+                vim.lsp.enable(enabled_servers)
             end
         end,
     },
