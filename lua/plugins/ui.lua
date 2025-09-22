@@ -37,21 +37,11 @@ return {
       dim_inactive = false,
     },
   },
+
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
-    },
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        pyright = {},
-      },
     },
   },
 
@@ -103,81 +93,5 @@ return {
       },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        pyright = {},
-        gopls = {},
-        vtsls = {},
-        ts_ls = {},
-        eslint = {},
-        clangd = {},
-        zls = {},
-      },
-      setup = {
-        clangd = function(_, opts)
-          opts.capabilities = opts.capabilities or {}
-          opts.capabilities.offsetEncoding = { "utf-16" }
-        end,
-
-        eslint = function()
-          require("lazyvim.util").lsp.on_attach(function(client)
-            if client.name == "eslint" then
-              client.server_capabilities.documentFormattingProvider = true
-            elseif client.name == "tsserver" then
-              client.server_capabilities.documentFormattingProvider = false
-            end
-          end)
-        end,
-      },
-    },
-  },
-
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "x",
-        },
-      },
-      ensure_installed = {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
-        "clangd",
-        "prettier",
-        "black",
-        "typescript-language-server",
-        "cmake-language-server",
-        "docker-compose-language-service",
-        "docker-language-server",
-        "nginx-language-server",
-        "tailwindcss-language-server",
-        "yaml-language-server",
-        "gofumpt",
-        "goimports",
-        "goimports-reviser",
-        "ruff",
-      },
-    },
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = {
-      trim_scope = "outer",
-      max_lines = 4,
-      separator = nil,
-      zindex = 20,
-    },
   },
 }
