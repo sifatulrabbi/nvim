@@ -6,11 +6,14 @@ vim.g.deprecation_warnings = true
 vim.opt.clipboard = ""
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.opt.colorcolumn = "80"
-
+vim.o.background = "dark"
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.breakindentopt = { "shift:2" } -- 2 spaces extra
 vim.opt.list = true
 -- "» "
 vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
-
 -- custom file types
 vim.filetype.add({
   extension = {
@@ -30,4 +33,8 @@ vim.filetype.add({
   },
 })
 
-vim.o.background = "dark"
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldenable = true
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldlevelstart = 99

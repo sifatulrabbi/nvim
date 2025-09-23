@@ -94,4 +94,17 @@ return {
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+
+  {
+    "jameswolensky/marker-groups.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("marker-groups").setup({
+        -- picker = "vim",
+        picker = "telescope",
+      })
+    end,
+  },
 }

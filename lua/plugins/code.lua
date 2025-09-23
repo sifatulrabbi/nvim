@@ -5,7 +5,6 @@ return {
       pyright = {},
       gopls = {},
       vtsls = {},
-      ts_ls = {},
       eslint = {},
       clangd = {},
       zls = {},
@@ -31,7 +30,6 @@ return {
         "clangd",
         "prettier",
         "black",
-        "typescript-language-server",
         "cmake-language-server",
         "docker-compose-language-service",
         "docker-language-server",
@@ -54,6 +52,41 @@ return {
       max_lines = 4,
       separator = nil,
       zindex = 20,
+    },
+  },
+
+  {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        accept = {
+          auto_brackets = { enabled = false },
+        },
+      },
+    },
+  },
+
+  -- Disable auto-pairing
+  {
+    "echasnovski/mini.pairs",
+    enabled = false,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    opts = {
+      -- Defaults
+      enable_close = true, -- Auto close tags
+      enable_rename = true, -- Auto rename pairs of tags
+      enable_close_on_slash = false, -- Auto close on trailing </
+    },
+    -- Also override individual filetype configs, these take priority.
+    -- Empty by default, useful if one of the "opts" global settings
+    -- doesn't work well in a specific filetype
+    per_filetype = {
+      ["html"] = {
+        enable_close = false,
+      },
     },
   },
 }
