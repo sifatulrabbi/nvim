@@ -2,13 +2,15 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      pyright = {},
-      gopls = {},
-      vtsls = {},
-      eslint = {},
-      clangd = {},
-      zls = {},
-      cspell = {},
+      servers = {
+        pyright = {},
+        gopls = {},
+        vtsls = {},
+        eslint = {},
+        clangd = {},
+        zls = {},
+        cspell = { filetypes = { "*" } },
+      },
     },
   },
 

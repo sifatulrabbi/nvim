@@ -12,8 +12,9 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.breakindentopt = { "shift:2" } -- 2 spaces extra
 vim.opt.list = true
--- "» "
 vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
 -- custom file types
 vim.filetype.add({
   extension = {
