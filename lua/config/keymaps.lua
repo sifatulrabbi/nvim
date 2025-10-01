@@ -12,3 +12,5 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Add to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open oil" })
+
+vim.keymap.set("n", "<leader>by", '<cmd>let @+ = expand("%:p")<CR>', { desc = "Copy full buffer path", noremap = true })
