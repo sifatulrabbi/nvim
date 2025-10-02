@@ -39,3 +39,6 @@ vim.filetype.add({
 -- vim.opt.foldenable = true
 -- vim.opt.foldlevel = 99
 -- vim.opt.foldlevelstart = 99
+
+vim.opt.conceallevel = 0
+vim.g.markdown_syntax_conceal = 0

@@ -28,7 +28,18 @@ return {
     lazy = false,
     opts = {
       defaults = {
-        layout_config = {},
+        path_display = { "truncate" },
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "bottom",
+            preview_width = 0.45,
+            results_width = 0.9,
+          },
+          width = 0.95,
+          height = 0.9,
+          preview_cutoff = 120,
+        },
       },
       pickers = {
         find_files = {

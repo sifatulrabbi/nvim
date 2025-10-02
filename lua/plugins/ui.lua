@@ -1,18 +1,5 @@
 return {
   {
-    "folke/snacks.nvim",
-    opts = {
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = false },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-    },
-  },
-
-  {
     "ellisonleao/gruvbox.nvim",
     opts = {
       terminal_colors = true, -- add neovim terminal colors
@@ -93,6 +80,27 @@ return {
       },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  {
+    "folke/snacks.nvim",
+    opts = {
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = false },
+      picker = { enabled = true },
+      quickfile = { enabled = true },
+    },
+    keys = {
+      { "<leader>e", "<cmd>Oil<CR>", desc = "File Explorer" },
+    },
   },
 
   {
