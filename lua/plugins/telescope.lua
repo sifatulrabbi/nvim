@@ -1,67 +1,64 @@
 local function get_fd_cmd()
-    -- In Neovim, vim.fn.executable returns 1 if the command exists
-    if vim.fn.executable("fd") == 1 then
-        return "fd"
-    end
-    if vim.fn.executable("fdfind") == 1 then
-        return "fdfind"
-    end
+	-- In Neovim, vim.fn.executable returns 1 if the command exists
+	if vim.fn.executable("fd") == 1 then
+		return "fd"
+	end
+	if vim.fn.executable("fdfind") == 1 then
+		return "fdfind"
+	end
 
-    vim.notify(
-        "Neither 'fd' nor 'fdfind' was found in your PATH",
-        vim.log.levels.ERROR
-    )
+	vim.notify("Neither 'fd' nor 'fdfind' was found in your PATH", vim.log.levels.ERROR)
 
-    return "fd"
+	return "fd"
 end
 
 return {
-    {
-        "nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
-        version = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                enabled = vim.fn.executable("make") == 1,
-            },
-        },
-        lazy = false,
-        opts = {},
-        config = function()
-            -- See `:help telescope` and `:help telescope.setup()`
-            require("telescope").setup({
-                defaults = {
-                    layout_config = {},
-                },
-                pickers = {
-                    find_files = {
-                        find_command = {
-                            get_fd_cmd(),
-                            "-H",
-                            "-t",
-                            "f",
-                            "--exclude",
-                            ".git",
-                            "--exclude",
-                            "node_modules",
-                            "--exclude",
-                            ".venv",
-                        },
-                    },
-                    current_buffer_fuzzy_find = {
-                        theme = "dropdown",
-                    },
-                },
-            })
+	{
+		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
+		version = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+				enabled = vim.fn.executable("make") == 1,
+			},
+		},
+		lazy = false,
+		opts = {},
+		config = function()
+			-- See `:help telescope` and `:help telescope.setup()`
+			require("telescope").setup({
+				defaults = {
+					layout_config = {},
+				},
+				pickers = {
+					find_files = {
+						find_command = {
+							get_fd_cmd(),
+							"-H",
+							"-t",
+							"f",
+							"--exclude",
+							".git",
+							"--exclude",
+							"node_modules",
+							"--exclude",
+							".venv",
+						},
+					},
+					current_buffer_fuzzy_find = {
+						theme = "dropdown",
+					},
+				},
+			})
 
-            -- Enable telescope fzf native, if installed
-            pcall(require("telescope").load_extension, "fzf")
-            pcall(require("telescope").load_extension, "lazygit")
+			-- Enable telescope fzf native, if installed
+			pcall(require("telescope").load_extension, "fzf")
+			pcall(require("telescope").load_extension, "lazygit")
 
-            local ts_builtin = require("telescope.builtin")
+			local ts_builtin = require("telescope.builtin")
             -- stylua: ignore start
             -- searching files, words, tags
             vim.keymap.set("n", "<leader>fg", ts_builtin.live_grep, { desc = "Live [g]rep" })
@@ -83,6 +80,6 @@ return {
             vim.keymap.set("n", "<leader>fs", ts_builtin.lsp_document_symbols, { desc = "LSP: Document [S]ymbols" })
             vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols,
                 { desc = "LSP: Workspace [S]ymbols" })
-        end,
-    },
+		end,
+	},
 }

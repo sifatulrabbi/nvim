@@ -1,4 +1,3 @@
--- stylua: ignore start
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Remap for dealing with word wrap
@@ -17,8 +16,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move HL line up" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "" })
 
 -- system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { desc = "Add to clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p", { desc = "Paste from clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Add to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 
 -- quick commands and toggles
 vim.keymap.set("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Open [l]azy" })
@@ -39,7 +38,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohl<CR>")
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open Netrw/Oil", noremap = true, silent = true })
 
 -- make 's' act as <C-w> in normal & visual
-vim.keymap.set('n', 's', '<C-w>', { noremap = true })
-vim.keymap.set('v', 's', '<C-w>', { noremap = true })
+vim.keymap.set("n", "s", "<C-w>", { noremap = true })
+vim.keymap.set("v", "s", "<C-w>", { noremap = true })
 -- (optional) preserve substitute on 'S'
-vim.keymap.set('n', 'S', 's', { noremap = true })
+vim.keymap.set("n", "S", "s", { noremap = true })
