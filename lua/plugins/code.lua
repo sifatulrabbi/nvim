@@ -168,7 +168,7 @@ return {
 				end
 				local has_new = type(vim.lsp.inlay_hint) == "table" and type(vim.lsp.inlay_hint.enable) == "function"
 				if has_new then
-					vim.lsp.inlay_hint.enable(buf, true)
+					vim.lsp.inlay_hint.enable(true, { bufnr = buf })
 				elseif vim.lsp.buf and type(vim.lsp.buf.inlay_hint) == "function" then
 					vim.lsp.buf.inlay_hint(buf, true)
 				end
@@ -233,28 +233,29 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local lint = require("lint")
-			lint.linters.csharpier_check = {
-				cmd = "csharpier",
-				args = { "--check", "$FILENAME" },
-				stdin = false,
-				ignore_exitcode = true,
-				parser = function(output)
-					local diagnostics = {}
-					if output == "" then
-						return diagnostics
-					end
-					for _, line in ipairs(vim.split(output, "\n", { trimempty = true })) do
-						diagnostics[#diagnostics + 1] = {
-							lnum = 0,
-							col = 0,
-							severity = vim.diagnostic.severity.WARN,
-							message = line,
-							source = "csharpier",
-						}
-					end
+		lint.linters.csharpier_check = {
+			cmd = "csharpier",
+			args = { "--check" },
+			stdin = false,
+			append_fname = true,
+			ignore_exitcode = true,
+			parser = function(output)
+				local diagnostics = {}
+				if output == "" then
 					return diagnostics
-				end,
-			}
+				end
+				for _, line in ipairs(vim.split(output, "\n", { trimempty = true })) do
+					diagnostics[#diagnostics + 1] = {
+						lnum = 0,
+						col = 0,
+						severity = vim.diagnostic.severity.WARN,
+						message = line,
+						source = "csharpier",
+					}
+				end
+				return diagnostics
+			end,
+		}
 			lint.linters_by_ft = {
 				python = { "ruff" },
 				typescript = { "eslint_d" },
@@ -282,7 +283,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-			opts = {
+		opts = {
 				formatters_by_ft = {
 					python = { "ruff_format" },
 					typescript = { "prettierd", "prettier" },
