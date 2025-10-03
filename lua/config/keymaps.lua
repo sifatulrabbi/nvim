@@ -12,3 +12,4 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Add to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 
 vim.keymap.set("n", "<leader>by", '<cmd>let @+ = expand("%:p")<CR>', { desc = "Copy full buffer path", noremap = true })
+vim.keymap.set("n", "<leader>xf", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
