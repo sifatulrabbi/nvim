@@ -1,5 +1,11 @@
 return {
+    { "folke/which-key.nvim",         opts = {} },
+
     { "MunifTanjim/nui.nvim",         lazy = true },
+
+    { "kyazdani42/nvim-web-devicons", opts = {} },
+
+    { "echasnovski/mini.nvim",        version = "*" },
 
     {
         "nvim-lualine/lualine.nvim",
@@ -66,7 +72,6 @@ return {
                 ["g\\"] = "actions.toggle_trash",
             },
         },
-        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
     {
@@ -103,86 +108,41 @@ return {
     },
 
     {
-        "folke/which-key.nvim",
-        opts = {},
-        -- config = function()
-        --     require("which-key").register({
-        --         ["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
-        --     })
-        -- end,
-    },
-
-    {
         "lewis6991/gitsigns.nvim",
         name = "gitsigns",
-        config = function()
-            require("gitsigns").setup({
-                signs = {
-                    add = { text = "+" },
-                    change = { text = "~" },
-                    delete = { text = "-" },
-                    topdelete = { text = "^" },
-                    changedelete = { text = "~" },
-                    untracked = { text = "?" },
-                },
-                on_attach = function(bufnr)
-                    vim.keymap.set(
-                        "n",
-                        "<leader>hp",
-                        require("gitsigns").preview_hunk,
-                        { buffer = bufnr, desc = "Preview git hunk" }
-                    )
-
-                    -- don't override the built-in and fugitive keymaps
-                    local gs = package.loaded.gitsigns
-                    vim.keymap.set({ "n", "v" }, "]c", function()
-                        if vim.wo.diff then
-                            return "]c"
-                        end
-                        vim.schedule(function()
-                            gs.next_hunk()
-                        end)
-                        return "<Ignore>"
-                    end, {
-                        expr = true,
-                        buffer = bufnr,
-                        desc = "Jump to next hunk",
-                    })
-                    vim.keymap.set({ "n", "v" }, "[c", function()
-                        if vim.wo.diff then
-                            return "[c"
-                        end
-                        vim.schedule(function()
-                            gs.prev_hunk()
-                        end)
-                        return "<Ignore>"
-                    end, {
-                        expr = true,
-                        buffer = bufnr,
-                        desc = "Jump to previous hunk",
-                    })
-                end,
-            })
-        end,
+        opts = {
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "-" },
+                topdelete = { text = "^" },
+                changedelete = { text = "~" },
+                untracked = { text = "?" },
+            },
+            on_attach = function(bufnr)
+                vim.keymap.set(
+                    "n",
+                    "<leader>hp",
+                    require("gitsigns").preview_hunk,
+                    { buffer = bufnr, desc = "Preview git hunk" }
+                )
+            end,
+        },
     },
-
-    { "kyazdani42/nvim-web-devicons", opts = {} },
-
-    { "echasnovski/mini.nvim",        version = "*" },
 
     {
         "folke/zen-mode.nvim",
-        config = function()
-            require("zen-mode").setup({
-                window = {
-                    width = 120,
-                    height = 1,
-                    options = {
-                        wrap = true,
-                    },
+        opts = {
+            window = {
+                width = 120,
+                height = 1,
+                options = {
+                    wrap = true,
                 },
-            })
-            vim.api.nvim_set_keymap("n", "<leader>z", "<cmd>ZenMode<CR>", { noremap = true, silent = true })
-        end,
+            },
+        },
+        keys = {
+            { "<leader>z", "<cmd>ZenMode<cr>", desc = "Enter zen mode", mode = "n", noremap = true, silent = true },
+        },
     },
 }

@@ -26,60 +26,49 @@ return {
 			},
 		},
 		lazy = false,
-		opts = {},
+		opts = {
+			defaults = {
+				layout_config = {},
+			},
+			pickers = {
+				find_files = {
+					find_command = {
+						get_fd_cmd(),
+						"-H",
+						"-t",
+						"f",
+						"--exclude",
+						".git",
+						"--exclude",
+						"node_modules",
+						"--exclude",
+						".venv",
+					},
+				},
+				current_buffer_fuzzy_find = {
+					theme = "dropdown",
+				},
+			},
+		},
+		keys = {
+			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live [g]rep", noremap = true },
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Search [f]iles", noremap = true },
+			{ "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Fuzzily search in current buffer", noremap = true },
+			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Search [h]elp", noremap = true },
+			{ "<leader>key", "<cmd>Telescope keymaps<cr>", desc = "Normal mode keymaps", noremap = true },
+			{ "<leader>spl", "<cmd>Telescope spell_suggest<cr>", desc = "Suggest spellings", noremap = true },
+			{ "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Git [s]tatus", noremap = true },
+			{ "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "LSP: Goto [D]efinition" },
+			{ "gr", "<cmd>Telescope lsp_references<cr>", desc = "LSP: Goto [R]eferences", noremap = true },
+			{ "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "LSP: Goto [I]mplementation", noremap = true },
+			{ "gD", "<cmd>Telescope lsp_type_definitions<cr>", desc = "LSP: Type [D]efinition", noremap = true },
+			{ "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP: Document [S]ymbols", noremap = true },
+			{ "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "LSP: Workspace [S]ymbols", noremap = true },
+		},
 		config = function()
-			-- See `:help telescope` and `:help telescope.setup()`
-			require("telescope").setup({
-				defaults = {
-					layout_config = {},
-				},
-				pickers = {
-					find_files = {
-						find_command = {
-							get_fd_cmd(),
-							"-H",
-							"-t",
-							"f",
-							"--exclude",
-							".git",
-							"--exclude",
-							"node_modules",
-							"--exclude",
-							".venv",
-						},
-					},
-					current_buffer_fuzzy_find = {
-						theme = "dropdown",
-					},
-				},
-			})
-
 			-- Enable telescope fzf native, if installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "lazygit")
-
-			local ts_builtin = require("telescope.builtin")
-            -- stylua: ignore start
-            -- searching files, words, tags
-            vim.keymap.set("n", "<leader>fg", ts_builtin.live_grep, { desc = "Live [g]rep" })
-            vim.keymap.set("n", "<leader>ff", ts_builtin.find_files, { desc = "Search [f]iles" })
-            vim.keymap.set("n", "<leader>/", ts_builtin.current_buffer_fuzzy_find,
-                { desc = "Fuzzily search in current buffer" })
-            vim.keymap.set("n", "<leader>fh", ts_builtin.help_tags, { desc = "Search [h]elp" })
-
-            -- helpful telescope features
-            vim.keymap.set("n", "<leader>key", ts_builtin.keymaps, { desc = "Normal mode keymaps" })
-            vim.keymap.set("n", "<leader>spl", ts_builtin.spell_suggest, { desc = "Suggest spellings" })
-            vim.keymap.set("n", "<leader>gs", ts_builtin.git_status, { desc = "Git [s]tatus" })
-
-            -- telescope based LSP
-            vim.keymap.set("n", "gd", ts_builtin.lsp_definitions, { desc = "LSP: Goto [D]efinition" })
-            vim.keymap.set("n", "gr", ts_builtin.lsp_references, { desc = "LSP: Goto [R]eferences" })
-            vim.keymap.set("n", "gi", ts_builtin.lsp_implementations, { desc = "LSP: Goto [I]mplementation" })
-            vim.keymap.set("n", "gD", ts_builtin.lsp_type_definitions, { desc = "LSP: Type [D]efinition" })
-            vim.keymap.set("n", "<leader>fs", ts_builtin.lsp_document_symbols, { desc = "LSP: Document [S]ymbols" })
-            vim.keymap.set("n", "<leader>fS", ts_builtin.lsp_dynamic_workspace_symbols,
-                { desc = "LSP: Workspace [S]ymbols" })
 		end,
 	},
 }

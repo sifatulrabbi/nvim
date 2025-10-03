@@ -1,5 +1,5 @@
 return {
-	"tpope/vim-fugitive",
+	{ "tpope/vim-fugitive", opts = {}},
 	-- "tpope/vim-sleuth",
 
 	{ "numToStr/Comment.nvim", opts = {} },
@@ -10,77 +10,55 @@ return {
 			"lewis6991/gitsigns.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
+		version = false,
 		init = function()
 			vim.g.barbar_auto_setup = true
-
-			local map = vim.api.nvim_set_keymap
-			local opts = { noremap = true, silent = true }
-
+		end,
+		opts = {
+			animation = false,
+			insert_at_start = false,
+			auto_hide = false,
+		},
+		keys = {
 			-- Move to previous/next
-			map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
-			map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
-			map("n", "g,", "<Cmd>BufferPrevious<CR>", opts)
-			map("n", "g.", "<Cmd>BufferNext<CR>", opts)
+			{ "g,", "<Cmd>BufferPrevious<CR>", noremap = true, silent = true },
+			{ "g.", "<Cmd>BufferNext<CR>", noremap = true, silent = true },
 			-- Re-order to previous/next
-			map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
-			map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
-			map("n", "g<", "<Cmd>BufferMovePrevious<CR>", opts)
-			map("n", "g>", "<Cmd>BufferMoveNext<CR>", opts)
+			{ "g<", "<Cmd>BufferMovePrevious<CR>", noremap = true, silent = true },
+			{ "g>", "<Cmd>BufferMoveNext<CR>", noremap = true, silent = true },
 			-- Goto buffer in position...
-			map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
-			map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
-			map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
-			map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
-			map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
-			map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
-			map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
-			map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
-			map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
-			map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
-			map("n", "g1", "<Cmd>BufferGoto 1<CR>", opts)
-			map("n", "g2", "<Cmd>BufferGoto 2<CR>", opts)
-			map("n", "g3", "<Cmd>BufferGoto 3<CR>", opts)
-			map("n", "g4", "<Cmd>BufferGoto 4<CR>", opts)
-			map("n", "g5", "<Cmd>BufferGoto 5<CR>", opts)
-			map("n", "g6", "<Cmd>BufferGoto 6<CR>", opts)
-			map("n", "g7", "<Cmd>BufferGoto 7<CR>", opts)
-			map("n", "g8", "<Cmd>BufferGoto 8<CR>", opts)
-			map("n", "g9", "<Cmd>BufferGoto 9<CR>", opts)
-			map("n", "g0", "<Cmd>BufferGoto 10<CR>", opts)
+			{ "g1", "<Cmd>BufferGoto 1<CR>", noremap = true, silent = true },
+			{ "g2", "<Cmd>BufferGoto 2<CR>", noremap = true, silent = true },
+			{ "g3", "<Cmd>BufferGoto 3<CR>", noremap = true, silent = true },
+			{ "g4", "<Cmd>BufferGoto 4<CR>", noremap = true, silent = true },
+			{ "g5", "<Cmd>BufferGoto 5<CR>", noremap = true, silent = true },
+			{ "g6", "<Cmd>BufferGoto 6<CR>", noremap = true, silent = true },
+			{ "g7", "<Cmd>BufferGoto 7<CR>", noremap = true, silent = true },
+			{ "g8", "<Cmd>BufferGoto 8<CR>", noremap = true, silent = true },
+			{ "g9", "<Cmd>BufferGoto 9<CR>", noremap = true, silent = true },
+			{ "g0", "<Cmd>BufferGoto 10<CR>", noremap = true, silent = true },
 			-- Pin/unpin buffer
-			map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
-			map("n", "gp", "<Cmd>BufferPin<CR>", opts)
-			-- Goto pinned/unpinned buffer
-			--                 :BufferGotoPinned
-			--                 :BufferGotoUnpinned
+			{ "<leader>bp", "<Cmd>BufferPin<CR>", noremap = true, silent = true },
 			-- Close buffer
-			map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
-			map("n", "gC", "<Cmd>BufferClose<CR>", opts)
+			{ "<leader>bc", "<Cmd>BufferClose<CR>", noremap = true, silent = true },
 			-- Wipeout buffer
 			--                 :BufferWipeout
-			-- Close commands
+			-- Other close commands
 			--                 :BufferCloseAllButCurrent
+			{ "<leader>bo", "<Cmd>BufferCloseAllButCurrent<CR>", noremap = true, silent = true },
 			--                 :BufferCloseAllButPinned
 			--                 :BufferCloseAllButCurrentOrPinned
 			--                 :BufferCloseBuffersLeft
 			--                 :BufferCloseBuffersRight
 			-- Magic buffer-picking mode
-			map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
+			{ "<leader>fb", "<Cmd>BufferPick<CR>", noremap = true, silent = true },
 			-- Sort automatically by...
-			-- map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
-			-- map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
-			-- map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
-			-- map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
-			-- map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
-		end,
-		config = function()
-			require("barbar").setup({
-				animation = false,
-				insert_at_start = false,
-				auto_hide = false,
-			})
-		end,
-		version = "^1.0.0",
+			-- { "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", silent = true, noremap = true }
+			-- { "<leader>bn", "<Cmd>BufferOrderByName<CR>", silent = true, noremap = true }
+			-- { "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", silent = true, noremap = true }
+			-- { "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>", silent = true, noremap = true }
+			-- { "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>", silent = true, noremap = true }
+		},
 	},
 
 	{
@@ -110,12 +88,12 @@ return {
 				desc = "Buffer Diagnostics (Trouble)",
 			},
 			{
-				"<leader>cs",
+				"<leader>xs",
 				"<cmd>Trouble symbols toggle<cr>",
 				desc = "Symbols (Trouble)",
 			},
 			{
-				"<leader>cS",
+				"<leader>xS",
 				"<cmd>Trouble lsp toggle<cr>",
 				desc = "LSP references/definitions/... (Trouble)",
 			},
@@ -183,7 +161,7 @@ return {
 		-- setting the keybinding for LazyGit with 'keys' is recommended in
 		-- order to load the plugin when the command is run for the first time
 		keys = {
-			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
 }
