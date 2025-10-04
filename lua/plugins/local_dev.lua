@@ -1,6 +1,6 @@
 return {
-	{
-		dir = "~/coding/learning-plugins.nvim",
-		opts = {},
-	},
+    {
+        dir = "~/coding/learning-plugins.nvim",
+        opts = {},
+    },
 }

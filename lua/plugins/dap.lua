@@ -1,54 +1,54 @@
 return {
-	{
-		"mfussenegger/nvim-dap",
-		dependencies = {
-			"rcarriga/nvim-dap-ui",
-			"williamboman/mason.nvim",
-			"jay-babu/mason-nvim-dap.nvim",
-			"leoluz/nvim-dap-go",
-			"theHamsta/nvim-dap-virtual-text",
-			"nvim-neotest/nvim-nio",
-		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "williamboman/mason.nvim",
+            "jay-babu/mason-nvim-dap.nvim",
+            "leoluz/nvim-dap-go",
+            "theHamsta/nvim-dap-virtual-text",
+            "nvim-neotest/nvim-nio",
+        },
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
 
-			require("nvim-dap-virtual-text").setup({})
-			require("mason-nvim-dap").setup({
-				automatic_installation = true,
-				automatic_setup = true,
-				handlers = {},
-				ensure_installed = {
-					"delve",
-				},
-			})
+            require("nvim-dap-virtual-text").setup({})
+            require("mason-nvim-dap").setup({
+                automatic_installation = true,
+                automatic_setup = true,
+                handlers = {},
+                ensure_installed = {
+                    "delve",
+                },
+            })
 
-			dapui.setup({
-				icons = {
-					expanded = "▾",
-					collapsed = "▸",
-					current_frame = "*",
-				},
-				controls = {
-					icons = {
-						pause = "⏸",
-						play = "▶",
-						step_into = "⏎",
-						step_over = "⏭",
-						step_out = "⏮",
-						step_back = "b",
-						run_last = "▶▶",
-						terminate = "⏹",
-						disconnect = "⏏",
-					},
-				},
-			})
+            dapui.setup({
+                icons = {
+                    expanded = "▾",
+                    collapsed = "▸",
+                    current_frame = "*",
+                },
+                controls = {
+                    icons = {
+                        pause = "⏸",
+                        play = "▶",
+                        step_into = "⏎",
+                        step_over = "⏭",
+                        step_out = "⏮",
+                        step_back = "b",
+                        run_last = "▶▶",
+                        terminate = "⏹",
+                        disconnect = "⏏",
+                    },
+                },
+            })
 
-			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-			dap.listeners.before.event_exited["dapui_config"] = dapui.close
+            dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+            dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+            dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
-			require("dap-go").setup()
+            require("dap-go").setup()
 
             -- stylua: ignore start
             vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
@@ -60,6 +60,6 @@ return {
                 { desc = "Debug: Set Breakpoint" })
             -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
             vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
-		end,
-	},
+        end,
+    },
 }
