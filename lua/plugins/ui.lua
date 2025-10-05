@@ -40,7 +40,6 @@ return {
       delete_to_trash = true,
       watch_for_changes = true,
       skip_confirm_for_simple_edits = true,
-      trash_command = vim.fn.has("mac") == 1 and "trash" or "gio trash",
       view_options = {
         show_hidden = true,
         sort = {
