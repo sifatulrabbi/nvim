@@ -34,9 +34,13 @@ return {
 
   {
     "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       default_file_explorer = true,
       delete_to_trash = true,
+      watch_for_changes = true,
+      skip_confirm_for_simple_edits = true,
+      trash_command = vim.fn.has("mac") == 1 and "trash" or "gio trash",
       view_options = {
         show_hidden = true,
         sort = {
@@ -60,6 +64,12 @@ return {
         timeout_ms = 1000,
         autosave_changes = false,
       },
+      float = {
+        max_width = 0.5,
+        max_height = 0.7,
+        border = "rounded",
+        win_options = { winblend = 0 },
+      },
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
@@ -79,7 +89,6 @@ return {
         ["g\\"] = "actions.toggle_trash",
       },
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   {
@@ -95,24 +104,24 @@ return {
       bigfile = { enabled = true },
       dashboard = { enabled = true },
       explorer = { enabled = false },
-      picker = { enabled = true },
+      picker = { enabled = false },
       quickfile = { enabled = true },
     },
     keys = {
-      { "<leader>e", "<cmd>Oil<CR>", desc = "File Explorer" },
+      {
+        "-",
+        function()
+          require("oil").open()
+        end,
+        desc = "Oil: Open parent",
+      },
+      {
+        "<leader>e",
+        function()
+          require("oil").open_float()
+        end,
+        desc = "Oil: Float",
+      },
     },
-  },
-
-  {
-    "jameswolensky/marker-groups.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("marker-groups").setup({
-        -- picker = "vim",
-        picker = "telescope",
-      })
-    end,
   },
 }

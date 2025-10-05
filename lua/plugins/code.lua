@@ -1,14 +1,41 @@
+local ensure_installed = {
+  "pyright",
+  "vtsls",
+  "gopls",
+  "omnisharp",
+  "clangd",
+  "ruff",
+  "eslint_d",
+  "golangci-lint",
+  "clang-format",
+  "cpplint",
+  "csharpier",
+  "prettierd",
+  "black",
+  "clang-format",
+  "csharpier",
+  "gofumpt",
+  "goimports",
+  "goimports-reviser",
+  "prettier",
+  "stylua",
+  "cspell-lsp",
+  "shfmt",
+  "html-lsp",
+  "yaml-language-server",
+  "docker-compose-language-service",
+  "css-lsp",
+  "dockerfile-language-server",
+  "lua-language-server",
+  "marksman",
+  "sqls",
+}
+
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {},
-        gopls = {},
-        vtsls = {},
-        eslint = {},
-        clangd = {},
-        zls = {},
         cspell = {},
       },
     },
@@ -24,26 +51,7 @@ return {
           package_uninstalled = "x",
         },
       },
-      ensure_installed = {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
-        "clangd",
-        "prettier",
-        "black",
-        "cmake-language-server",
-        "docker-compose-language-service",
-        "docker-language-server",
-        "nginx-language-server",
-        "tailwindcss-language-server",
-        "yaml-language-server",
-        "gofumpt",
-        "goimports",
-        "goimports-reviser",
-        "ruff",
-        "cspell-lsp",
-      },
+      ensure_installed = ensure_installed,
     },
   },
 
@@ -66,12 +74,6 @@ return {
         },
       },
     },
-  },
-
-  -- Disable auto-pairing
-  {
-    "echasnovski/mini.pairs",
-    enabled = false,
   },
 
   {

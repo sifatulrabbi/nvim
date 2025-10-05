@@ -33,11 +33,7 @@ return {
         layout_config = {
           horizontal = {
             prompt_position = "bottom",
-            preview_width = 0.45,
-            results_width = 0.9,
           },
-          width = 0.95,
-          height = 0.9,
           preview_cutoff = 120,
         },
       },
