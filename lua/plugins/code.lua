@@ -42,7 +42,7 @@ return {
   },
 
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ui = {
         icons = {
@@ -52,6 +52,22 @@ return {
         },
       },
       ensure_installed = ensure_installed,
+    },
+  },
+
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        c = { "clang_format" },
+      },
+      formatters = {
+        clang_format = {
+          prepend_args = {
+            "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 80, UseTab: ForIndentation}",
+          },
+        },
+      },
     },
   },
 
