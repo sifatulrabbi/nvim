@@ -15,6 +15,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"
+vim.opt.guicursor = "n-v-c-i:block"
 -- custom file types
 vim.filetype.add({
   extension = {
