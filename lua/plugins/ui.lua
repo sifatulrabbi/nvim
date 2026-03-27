@@ -88,6 +88,27 @@ return {
   --   },
   -- },
 
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   opts = {
+  --     flavour = "macchiato", -- latte, frappe, macchiato, mocha, auto,
+  --     integrations = {
+  --       bufferline = true,
+  --     },
+  --   },
+  -- },
+
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   version = "*",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   -- opts = {
+  --   --   highlights = require("catppuccin.groups.integrations.bufferline").get_theme(),
+  --   -- },
+  -- },
+
   {
     "LazyVim/LazyVim",
     opts = {

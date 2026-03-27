@@ -27,6 +27,7 @@ local ensure_installed = {
   "lua-language-server",
   "marksman",
   "sqls",
+  "rust-analyzer",
 }
 
 return {
@@ -35,6 +36,8 @@ return {
     opts = {
       servers = {
         cspell = {},
+        -- copilot.lua only works with its own copilot lsp server
+        copilot = { enabled = true },
       },
     },
   },
@@ -58,6 +61,7 @@ return {
     opts = {
       formatters_by_ft = {
         c = { "clang_format" },
+        handlebars = {},
       },
       formatters = {
         clang_format = {
