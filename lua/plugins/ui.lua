@@ -27,6 +27,29 @@ return {
   },
 
   -- {
+  --   "metalelf0/kintsugi-nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     variant = "dark", -- "dark" | "flared"
+  --     transparent = false,
+  --     terminal_colors = true,
+  --     bold_keywords = true,
+  --     italic_comments = false,
+  --   },
+  --   -- config = function()
+  --   --   require("kintsugi").setup({
+  --   --     variant = "dark", -- "dark" | "flared"
+  --   --     transparent = false,
+  --   --     terminal_colors = true,
+  --   --     bold_keywords = true,
+  --   --     italic_comments = false,
+  --   --   })
+  --   --   vim.cmd.colorscheme("kintsugi-dark") -- or "kintsugi-flared"
+  --   -- end,
+  -- },
+
+  -- {
   --   "rose-pine/neovim",
   --   name = "rose-pine",
   --   opts = {
