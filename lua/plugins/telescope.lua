@@ -12,6 +12,27 @@ local function get_fd_cmd()
   return "fd"
 end
 
+-- Gitignored dirs that should still show up in find_files
+-- (agent plans, todos, scratch notes, etc.)
+local gitignore_whitelist = { ".project", ".planning" }
+
+local function build_find_command()
+  local base = get_fd_cmd() .. " -H -t f --exclude .git --exclude node_modules --exclude .venv"
+  -- Pass 1: normal listing (respects .gitignore).
+  -- Pass 2: force-list whitelisted dirs (--no-ignore-vcs); missing dirs only
+  -- warn on stderr. awk dedupes when a whitelisted dir isn't gitignored.
+  return {
+    "sh",
+    "-c",
+    string.format(
+      "{ %s; %s --no-ignore-vcs . %s 2>/dev/null; } | awk 'seen[$0]++==0'",
+      base,
+      base,
+      table.concat(gitignore_whitelist, " ")
+    ),
+  }
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -39,18 +60,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = {
-            get_fd_cmd(),
-            "-H",
-            "-t",
-            "f",
-            "--exclude",
-            ".git",
-            "--exclude",
-            "node_modules",
-            "--exclude",
-            ".venv",
-          },
+          find_command = build_find_command(),
         },
         current_buffer_fuzzy_find = {
           theme = "dropdown",
