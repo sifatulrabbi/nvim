@@ -12,8 +12,6 @@ local ensure_installed = {
   "csharpier",
   "prettierd",
   "black",
-  "clang-format",
-  "csharpier",
   "gofumpt",
   "goimports",
   "goimports-reviser",
